@@ -1,22 +1,26 @@
-﻿using OpenTK.Graphics.OpenGL;
-using OpenGL_Game.Managers;
+﻿using OpenGL_Game.Managers;
 using OpenTK.Windowing.Common;
-using OpenTK.Windowing.GraphicsLibraryFramework;
 using SkiaSharp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OpenTK.Graphics.OpenGL;
 
 namespace OpenGL_Game.Scenes
 {
-    class MainMenuScene : Scene
+    class GameOverScene : Scene
     {
-        public MainMenuScene(SceneManager sceneManager) : base(sceneManager)
+        public GameOverScene(SceneManager sceneManager) : base(sceneManager)
         {
             // Set the title of the window
-            sceneManager.Title = "Main Menu";
+            sceneManager.Title = "Game Over";
             // Set the Render and Update delegates to the Update and Render methods of this class
             sceneManager.renderer = Render;
             sceneManager.updater = Update;
-
-            sceneManager.mouseDelegate += Mouse_BottonPressed;
+            sceneManager.keyboardUpDelegate += PressM;
+            sceneManager.keyboardDownDelegate += PressM;
 
             GL.ClearColor(0.2f, 0.75f, 1.0f, 1.0f);
         }
@@ -40,29 +44,23 @@ namespace OpenGL_Game.Scenes
             paint.StrokeWidth = 2;
             paint.TextAlign = SKTextAlign.Center;
             paint.IsAntialias = true;
-            paint.Color = SKColors.Yellow;
+            paint.Color = SKColors.White;
             paint.Style = SKPaintStyle.Fill;
-            GUI.DrawText("Main Menu", sceneManager.Size.X * 0.5f, 150, paint);
-            paint.Color = SKColors.DarkBlue;
+            GUI.DrawText("Game Over", sceneManager.Size.X * 0.5f, 150, paint);
+            paint.Color = SKColors.Black;
             paint.Style = SKPaintStyle.Stroke;
-            GUI.DrawText("Main Menu", sceneManager.Size.X * 0.5f, 150, paint);
+            GUI.DrawText("Game Over", sceneManager.Size.X * 0.5f, 150, paint);
             GUI.Render();
         }
 
-        public void Mouse_BottonPressed(MouseButtonEventArgs e)
+        public void PressM(KeyboardKeyEventArgs e)
         {
-            switch (e.Button)
+            switch (e.Key)
             {
-                case MouseButton.Left:
-                    sceneManager.StartNewGame();
-                    sceneManager.UpdateGame();
+                case Key.M:
+                    sceneManager.UpdateMain();
                     break;
             }
-        }
-
-        public override void Close()
-        {
-            sceneManager.mouseDelegate -= Mouse_BottonPressed;
         }
     }
 }

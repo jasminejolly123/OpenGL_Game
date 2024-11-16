@@ -5,6 +5,7 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Audio.OpenAL; // NEW for Audio
+using OpenTK.Platform.Windows;
 
 namespace OpenGL_Game.Managers
 {
@@ -24,6 +25,14 @@ namespace OpenGL_Game.Managers
 
         public delegate void MouseDelegate(MouseButtonEventArgs e);
         public MouseDelegate mouseDelegate;
+
+        public SceneTypes currentState;
+        public enum SceneTypes
+        {
+            SCENE_NONE,
+            SCENE_MAIN_MENU,
+            SCENE_GAME
+        }
 
         public SceneManager() : base(GameWindowSettings.Default, new NativeWindowSettings()
                                 { ClientSize = (width, height), Location = (windowXPos, windowYPos) })
@@ -109,6 +118,12 @@ namespace OpenGL_Game.Managers
             scene = new MainMenuScene(this);
         }
 
+        public void GameOver()
+        {
+            if (scene != null) scene.Close();
+            scene = new GameOverScene(this);
+        }
+
         public static int WindowWidth
         {
             get { return width; }
@@ -133,7 +148,22 @@ namespace OpenGL_Game.Managers
 
         public void ChangeScene(SceneTypes sceneType)
         {
+            currentState = sceneType;
+        }
 
+        public void UpdateNone()
+        {
+            ChangeScene(SceneTypes.SCENE_NONE);
+        }
+
+        public void UpdateMain()
+        {
+            ChangeScene(SceneTypes.SCENE_MAIN_MENU);
+        }
+
+        public void UpdateGame()
+        {
+            ChangeScene(SceneTypes.SCENE_GAME);
         }
     }
 
