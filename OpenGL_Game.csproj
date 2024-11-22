@@ -55,21 +55,6 @@
     <None Update="Geometry\Intergalactic_Spaceship\Intergalactic_Spaceship.obj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Geometry\Intergalactic_Spaceship\Intergalactic_Spaceship\Intergalactic_Spaceship.mtl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Geometry\Intergalactic_Spaceship\Intergalactic_Spaceship\Intergalactic_Spaceship.obj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Geometry\Intergalactic_Spaceship\Intergalactic_Spaceship\Intergalactic_Spaceship_color_4.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Geometry\Intergalactic_Spaceship\Intergalactic_Spaceship\Intergalactic_Spaceship_nmap_2_Tris.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Geometry\Intergalactic_Spaceship\Intergalactic_Spaceship\Intergalactic_Spaceship_rough.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Geometry\Intergalactic_Spaceship\Intergalactic_Spaceship_color_4.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

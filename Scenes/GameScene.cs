@@ -21,6 +21,7 @@ namespace OpenGL_Game.Scenes
         SystemManager systemManager;
         public Camera camera;
         public static GameScene gameInstance;
+        public bool[] keysPressed = new bool[500];
 
         public GameScene(SceneManager sceneManager) : base(sceneManager)
         {
@@ -35,6 +36,7 @@ namespace OpenGL_Game.Scenes
             sceneManager.updater = Update;
             // Set Keyboard events to go to a method in this class
             sceneManager.keyboardDownDelegate += Keyboard_KeyDown;
+            sceneManager.keyboardUpDelegate += Keyboard_KeyUp;
 
             // Enable Depth Testing
             GL.Enable(EnableCap.DepthTest);
@@ -53,7 +55,7 @@ namespace OpenGL_Game.Scenes
             // TODO: Add your initialization logic here
         }
 
-        private void CreateEntities()
+        public void CreateEntities()
         {
             Entity newEntity;
             Entity newEntity2;
@@ -63,6 +65,7 @@ namespace OpenGL_Game.Scenes
             newEntity = new Entity("Moon");
             newEntity.AddComponent(new ComponentPosition(-2.0f, 0.0f, 0.0f));
             newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
+            newEntity.AddComponent(new ComponentVelocity(1, 1, 1));
             entityManager.AddEntity(newEntity);
 
             newEntity2 = new Entity("Wraith_Raider_Starship");
@@ -87,6 +90,9 @@ namespace OpenGL_Game.Scenes
 
             newSystem = new SystemRender();
             systemManager.AddSystem(newSystem);
+
+            newSystem = new SystemPhysics();
+            systemManager.AddSystem(newSystem);
         }
 
         /// <summary>
@@ -100,6 +106,30 @@ namespace OpenGL_Game.Scenes
             //System.Console.WriteLine("fps=" + (int)(1.0/dt));
 
             // TODO: Add your update logic here
+
+            //switch (e.Key)
+            //{
+            //    case Keys.Up:
+            //        camera.MoveForward(0.1f);
+            //        break;
+            //    case Keys.Down:
+            //        camera.MoveForward(-0.1f);
+            //        break;
+            //    case Keys.Left:
+            //        camera.RotateY(-0.01f);
+            //        break;
+            //    case Keys.Right:
+            //        camera.RotateY(0.01f);
+            //        break;
+            //    case Keys.M:
+            //        sceneManager.StartMenu();
+            //        break;
+            //}
+
+            if (keysPressed[(char)Keys.Up])
+            {
+                camera.MoveForward(0.1f);
+            }
         }
 
         /// <summary>
@@ -132,24 +162,12 @@ namespace OpenGL_Game.Scenes
 
         public void Keyboard_KeyDown(KeyboardKeyEventArgs e)
         {
-            switch (e.Key)
-            {
-                case Keys.Up:
-                    camera.MoveForward(0.1f);
-                    break;
-                case Keys.Down:
-                    camera.MoveForward(-0.1f);
-                    break;
-                case Keys.Left:
-                    camera.RotateY(-0.01f);
-                    break;
-                case Keys.Right:
-                    camera.RotateY(0.01f);
-                    break;
-                case Keys.M:
-                    sceneManager.StartMenu();
-                    break;
-            }
+            keysPressed[(char)e.Key] = true;
+        }
+
+        public void Keyboard_KeyUp(KeyboardKeyEventArgs e)
+        {
+            keysPressed[(char)e.Key] = false;
         }
 
         public void PressM(KeyboardKeyEventArgs e)
