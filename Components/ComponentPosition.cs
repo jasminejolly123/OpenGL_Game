@@ -4,7 +4,7 @@ namespace OpenGL_Game.Components
 {
     class ComponentPosition : IComponent
     {
-        Vector3 position;
+        public Vector3 position;
 
         public ComponentPosition(float x, float y, float z)
         {

@@ -151,5 +151,25 @@ namespace OpenGL_Game.Scenes
                     break;
             }
         }
+
+        public void PressM(KeyboardKeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Keys.M:
+                    sceneManager.UpdateMain();
+                    break;
+            }
+        }
+
+        public void PressG(KeyboardKeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Keys.M:
+                    sceneManager.UpdateNone();
+                    break;
+            }
+        }
     }
 }

@@ -60,6 +60,17 @@ namespace OpenGL_Game.Scenes
             }
         }
 
+        public void Mouse_BottonPressedG(MouseButtonEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButton.Left:
+                    sceneManager.GameOver();
+                    sceneManager.UpdateNone();
+                    break;
+            }
+        }
+
         public override void Close()
         {
             sceneManager.mouseDelegate -= Mouse_BottonPressed;

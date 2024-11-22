@@ -19,8 +19,8 @@ namespace OpenGL_Game.Scenes
             // Set the Render and Update delegates to the Update and Render methods of this class
             sceneManager.renderer = Render;
             sceneManager.updater = Update;
-            sceneManager.keyboardUpDelegate += PressM;
-            sceneManager.keyboardDownDelegate += PressM;
+            //sceneManager.keyboardUpDelegate += PressM;
+            //sceneManager.keyboardDownDelegate += PressM;
 
             GL.ClearColor(0.2f, 0.75f, 1.0f, 1.0f);
         }
@@ -53,14 +53,9 @@ namespace OpenGL_Game.Scenes
             GUI.Render();
         }
 
-        public void PressM(KeyboardKeyEventArgs e)
+        public override void Close()
         {
-            switch (e.Key)
-            {
-                case Key.M:
-                    sceneManager.UpdateMain();
-                    break;
-            }
+            throw new NotImplementedException();
         }
     }
 }
