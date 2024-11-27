@@ -62,7 +62,7 @@ namespace OpenGL_Game.Scenes
             Entity newEntity3;
             Entity newEntity4;
 
-            newEntity = new Entity("Moon");
+            newEntity = new Entity("Moon", (-2.0f, 0.0f, 0.0f), (1, 1, 1), "Geometry/Moon/moon.obj", true, 1);
             newEntity.AddComponent(new ComponentPosition(-2.0f, 0.0f, 0.0f));
             newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
             newEntity.AddComponent(new ComponentVelocity(1, 1, 1));

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using OpenGL_Game.Components;
+using OpenGL_Game.OBJLoader;
+using OpenTK.Mathematics;
 
 namespace OpenGL_Game.Objects
 {
@@ -10,10 +12,21 @@ namespace OpenGL_Game.Objects
         string name;
         List<IComponent> componentList = new List<IComponent>();
         ComponentTypes mask;
- 
-        public Entity(string name)
+        public Vector3 position;
+        public Vector3 velocity;
+        public Geometry geometry;
+        public bool isCollidable;
+        public float collisionRadius;
+
+        public Entity (string name, ComponentPosition position, ComponentVelocity velocity, Geometry geometry,
+                bool isCollidable, float collisionRadius)
         {
             this.name = name;
+            this.position = position.position;
+            this.velocity = velocity.Velocity;
+            this.geometry = geometry;
+            this.isCollidable = isCollidable;
+            this.collisionRadius = collisionRadius;
         }
 
         /// <summary>Adds a single component</summary>
@@ -39,5 +52,7 @@ namespace OpenGL_Game.Objects
         {
             get { return componentList; }
         }
+
+        
     }
 }
