@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenGL_Game.Systems
 {
-    class SystemCollisionSphere : ISystem
+    class SystemCollisionSphere
     {
         const ComponentTypes MASK = (ComponentTypes.COMPONENT_POSITION | ComponentTypes.COMPONENT_COLLISION_SPHERE);
 
@@ -38,7 +38,8 @@ namespace OpenGL_Game.Systems
                     return component.ComponentType == ComponentTypes.COMPONENT_COLLISION_SPHERE;
                 });
 
-                ComponentCollisionSphere collision = (ComponentCollisionSphere) collComponent1;
+                ComponentCollisionSphere collision1 = (ComponentCollisionSphere) collComponent1;
+                ComponentCollisionSphere collision2 = (ComponentCollisionSphere) collComponent2;
 
                 IComponent posComponent1 = components1.Find(delegate (IComponent component)
                 {
@@ -52,15 +53,29 @@ namespace OpenGL_Game.Systems
                 ComponentPosition position1 = (ComponentPosition) posComponent1;
                 ComponentPosition position2 = (ComponentPosition)posComponent1;
 
-               
+                IComponent velComponent1 = components1.Find(delegate (IComponent component)
+                {
+                    return component.ComponentType == ComponentTypes.COMPONENT_VELOCITY;
+                });
+                IComponent velComponent2 = components2.Find(delegate (IComponent component)
+                {
+                    return component.ComponentType == ComponentTypes.COMPONENT_VELOCITY;
+                });
+
+                ComponentVelocity velocity1 = (ComponentVelocity) velComponent1;
+                ComponentVelocity velocity2 = (ComponentVelocity) velComponent2;
+
+                Collision(object1, object2, position1, position2, collision1, collision2, velocity1, velocity2);
+
             }
         }
 
-        public void Collision(Entity object1, Entity object2, ComponentPosition position1, ComponentPosition position2, ComponentCollisionSphere collision1, ComponentCollisionSphere collision2)
+        public void Collision(Entity object1, Entity object2, ComponentPosition position1, ComponentPosition position2, ComponentCollisionSphere collision1, ComponentCollisionSphere collision2, ComponentVelocity velocity1, ComponentVelocity velocity2)
         {
             if ((position1.Position - position2.Position).Length < collision1.Radius + collision2.Radius)
             {
-                CollisionManager.ProcessCollisions;
+                velocity1.Velocity = velocity1.Velocity * -1;
+                velocity2.Velocity = velocity2.Velocity * -1;
             }
         }
     }

@@ -8,6 +8,10 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Mathematics;
 using SkiaSharp;
+using ObjLoader.Loader.Data.VertexData;
+using static OpenGL_Game.Managers.SceneManager;
+using System.Numerics;
+using System.Windows.Forms;
 
 namespace OpenGL_Game.Scenes
 {
@@ -47,7 +51,7 @@ namespace OpenGL_Game.Scenes
             GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
             // Set Camera
-            camera = new Camera(new Vector3(0, 4, 7), new Vector3(0, 0, 0), (float)(sceneManager.Size.X) / (float)(sceneManager.Size.Y), 0.1f, 100f);
+            camera = new Camera(new OpenTK.Mathematics.Vector3(0, 4, 7), new OpenTK.Mathematics.Vector3(0, 0, 0), (float)(sceneManager.Size.X) / (float)(sceneManager.Size.Y), 0.1f, 100f);
 
             CreateEntities();
             CreateSystems();
@@ -61,27 +65,39 @@ namespace OpenGL_Game.Scenes
             Entity newEntity2;
             Entity newEntity3;
             Entity newEntity4;
+            Entity newEntity5;
 
-            newEntity = new Entity("Moon", (-2.0f, 0.0f, 0.0f), (1, 1, 1), "Geometry/Moon/moon.obj", true, 1);
+            newEntity = new Entity("Moon");
             newEntity.AddComponent(new ComponentPosition(-2.0f, 0.0f, 0.0f));
             newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
-            newEntity.AddComponent(new ComponentVelocity(1, 1, 1));
+            newEntity.AddComponent(new ComponentVelocity(1, 0, 0));
+            newEntity.AddComponent(new ComponentCollisionSphere(1));
             entityManager.AddEntity(newEntity);
 
             newEntity2 = new Entity("Wraith_Raider_Starship");
             newEntity2.AddComponent(new ComponentPosition(2, 0, 0));
             newEntity2.AddComponent(new ComponentGeometry("Geometry/Wraith_Raider_Starship/Wraith_Raider_Starship.obj"));
+            newEntity.AddComponent(new ComponentVelocity(-1, 0, 0));
+            newEntity.AddComponent(new ComponentCollisionSphere(1));
             entityManager.AddEntity(newEntity2);
 
-            newEntity3 = new Entity("Wraith_Raider_Starship");
-            newEntity3.AddComponent(new ComponentPosition(0, 0, 0));
-            newEntity3.AddComponent(new ComponentGeometry("Geometry/Wraith_Raider_Starship/Wraith_Raider_Starship.obj"));
-            entityManager.AddEntity(newEntity3);
+            //newEntity3 = new Entity("Wraith_Raider_Starship");
+            //newEntity3.AddComponent(new ComponentPosition(0, 0, 0));
+            //newEntity3.AddComponent(new ComponentGeometry("Geometry/Wraith_Raider_Starship/Wraith_Raider_Starship.obj"));
+            //entityManager.AddEntity(newEntity3);
 
-            newEntity4 = new Entity("Intergalactic_Spaceship");
-            newEntity4.AddComponent(new ComponentPosition(0.0f, 0.0f, 0.0f));
-            newEntity4.AddComponent(new ComponentGeometry("Geometry/Intergalactic_Spaceship/Intergalactic_Spaceship.obj"));
-            entityManager.AddEntity(newEntity4);
+            //newEntity4 = new Entity("Intergalactic_Spaceship");
+            //newEntity4.AddComponent(new ComponentPosition(0.0f, 0.0f, 0.0f));
+            //newEntity4.AddComponent(new ComponentGeometry("Geometry/Intergalactic_Spaceship/Intergalactic_Spaceship.obj"));
+            //entityManager.AddEntity(newEntity4);
+
+            
+
+            newEntity5 = new Entity("Maze");
+            newEntity5.AddComponent(new ComponentPosition(0, 0, 0));
+            newEntity5.AddComponent(new ComponentGeometry("Geometry/Maze/maze.obj"));
+            entityManager.AddEntity(newEntity5);
+
         }
 
         private void CreateSystems()
@@ -103,34 +119,36 @@ namespace OpenGL_Game.Scenes
         public override void Update(FrameEventArgs e)
         {
             dt = (float)e.Time;
-            //System.Console.WriteLine("fps=" + (int)(1.0/dt));
+            System.Console.WriteLine("fps=" + (int)(1.0 / dt));
 
-            // TODO: Add your update logic here
+            //TODO: Add your update logic here
 
-            //switch (e.Key)
-            //{
-            //    case Keys.Up:
-            //        camera.MoveForward(0.1f);
-            //        break;
-            //    case Keys.Down:
-            //        camera.MoveForward(-0.1f);
-            //        break;
-            //    case Keys.Left:
-            //        camera.RotateY(-0.01f);
-            //        break;
-            //    case Keys.Right:
-            //        camera.RotateY(0.01f);
-            //        break;
-            //    case Keys.M:
-            //        sceneManager.StartMenu();
-            //        break;
-            //}
+            switch (e.Key)
+            {
+                case System.Windows.Forms.Keys.Up:
+                    camera.MoveForward(0.1f);
+                    break;
+                case System.Windows.Forms.Keys.Down:
+                    camera.MoveForward(-0.1f);
+                    break;
+                case System.Windows.Forms.Keys.Left:
+                    camera.RotateY(-0.01f);
+                    break;
+                case System.Windows.Forms.Keys.Right:
+                    camera.RotateY(0.01f);
+                    break;
+                case System.Windows.Forms.Keys.M:
+                    sceneManager.StartMenu();
+                    break;
+            }
 
-            if (keysPressed[(char)Keys.Up])
+            if (keysPressed[(char)System.Windows.Forms.Keys.Up])
             {
                 camera.MoveForward(0.1f);
             }
         }
+
+
 
         /// <summary>
         /// This is called when the game should draw itself.

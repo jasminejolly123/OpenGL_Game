@@ -1,4 +1,5 @@
-﻿using OpenGL_Game.Objects;
+﻿using OpenGL_Game.Components;
+using OpenGL_Game.Objects;
 using System.Collections.Generic;
 
 namespace OpenGL_Game.Managers
@@ -23,7 +24,10 @@ namespace OpenGL_Game.Managers
         public CollisionManager()
         {
         }
-        public abstract void ProcessCollisions();
+        //public abstract void ProcessCollisions()
+        //{
+            
+        //}
     }
 
     
