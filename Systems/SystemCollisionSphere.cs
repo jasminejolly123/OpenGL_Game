@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenGL_Game.Systems
 {
-    class SystemCollisionSphere
+    class SystemCollisionSphere : ISystem
     {
         const ComponentTypes MASK = (ComponentTypes.COMPONENT_POSITION | ComponentTypes.COMPONENT_COLLISION_SPHERE);
 

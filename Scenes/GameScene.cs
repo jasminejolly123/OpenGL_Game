@@ -109,6 +109,9 @@ namespace OpenGL_Game.Scenes
 
             newSystem = new SystemPhysics();
             systemManager.AddSystem(newSystem);
+
+            newSystem = new SystemCollisionSphere();
+            systemManager.AddSystem(newSystem);
         }
 
         /// <summary>
@@ -192,7 +195,7 @@ namespace OpenGL_Game.Scenes
         {
             switch (e.Key)
             {
-                case Keys.M:
+                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.M:
                     sceneManager.UpdateMain();
                     break;
             }
@@ -202,7 +205,7 @@ namespace OpenGL_Game.Scenes
         {
             switch (e.Key)
             {
-                case Keys.M:
+                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.M:
                     sceneManager.UpdateNone();
                     break;
             }
