@@ -22,12 +22,12 @@ namespace OpenGL_Game.Systems
             get { return "SystemCollisionSphere"; }
         }
 
-        public void OnAction(Entity object1, Entity object2)
+        public void OnAction(List<Entity> entities)
         {
-            if ((object1.Mask & object2.Mask) == MASK)
+            if ((entities[0].Mask & entities[1].Mask) == MASK)
             {
-                List<IComponent> components1 = object1.Components;
-                List<IComponent> components2 = object2.Components;
+                List<IComponent> components1 = entities[0].Components;
+                List<IComponent> components2 = entities[1].Components;
 
                 IComponent collComponent1 = components1.Find(delegate (IComponent component)
                 {
@@ -65,7 +65,7 @@ namespace OpenGL_Game.Systems
                 ComponentVelocity velocity1 = (ComponentVelocity) velComponent1;
                 ComponentVelocity velocity2 = (ComponentVelocity) velComponent2;
 
-                Collision(object1, object2, position1, position2, collision1, collision2, velocity1, velocity2);
+                Collision(entities[0], entities[1], position1, position2, collision1, collision2, velocity1, velocity2);
 
             }
         }
