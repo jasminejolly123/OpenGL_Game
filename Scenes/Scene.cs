@@ -14,7 +14,7 @@ namespace OpenGL_Game.Scenes
 
         public abstract void Render(FrameEventArgs e);
 
-        public abstract void Update(FrameEventArgs e);
+        public abstract void Update(FrameEventArgs e, KeyboardKeyEventArgs f);
 
         public abstract void Close();
     }

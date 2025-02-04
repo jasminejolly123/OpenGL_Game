@@ -26,6 +26,8 @@ namespace OpenGL_Game.Scenes
         public Camera camera;
         public static GameScene gameInstance;
         public bool[] keysPressed = new bool[500];
+        FrameEventArgs e;
+        KeyboardKeyEventArgs f;
 
         public GameScene(SceneManager sceneManager) : base(sceneManager)
         {
@@ -37,7 +39,7 @@ namespace OpenGL_Game.Scenes
             sceneManager.Title = "Game";
             // Set the Render and Update delegates to the Update and Render methods of this class
             sceneManager.renderer = Render;
-            sceneManager.updater = Update;
+            sceneManager.updater = Update(e, f);
             // Set Keyboard events to go to a method in this class
             sceneManager.keyboardDownDelegate += Keyboard_KeyDown;
             sceneManager.keyboardUpDelegate += Keyboard_KeyUp;
@@ -67,19 +69,19 @@ namespace OpenGL_Game.Scenes
             Entity newEntity4;
             Entity newEntity5;
 
-            newEntity = new Entity("Moon");
-            newEntity.AddComponent(new ComponentPosition(-2.0f, 0.0f, 0.0f));
-            newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
-            newEntity.AddComponent(new ComponentVelocity(1, 0, 0));
-            newEntity.AddComponent(new ComponentCollisionSphere(1));
-            entityManager.AddEntity(newEntity);
+            //newEntity = new Entity("Moon");
+            //newEntity.AddComponent(new ComponentPosition(-2.0f, 0.0f, 0.0f));
+            //newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
+            //newEntity.AddComponent(new ComponentVelocity(1, 0, 0));
+            //newEntity.AddComponent(new ComponentCollisionSphere(1));
+            //entityManager.AddEntity(newEntity);
 
-            newEntity2 = new Entity("Wraith_Raider_Starship");
-            newEntity2.AddComponent(new ComponentPosition(2, 0, 0));
-            newEntity2.AddComponent(new ComponentGeometry("Geometry/Wraith_Raider_Starship/Wraith_Raider_Starship.obj"));
-            newEntity.AddComponent(new ComponentVelocity(-1, 0, 0));
-            newEntity.AddComponent(new ComponentCollisionSphere(1));
-            entityManager.AddEntity(newEntity2);
+            //newEntity2 = new Entity("Wraith_Raider_Starship");
+            //newEntity2.AddComponent(new ComponentPosition(2, 0, 0));
+            //newEntity2.AddComponent(new ComponentGeometry("Geometry/Wraith_Raider_Starship/Wraith_Raider_Starship.obj"));
+            //newEntity.AddComponent(new ComponentVelocity(-1, 0, 0));
+            //newEntity.AddComponent(new ComponentCollisionSphere(1));
+            //entityManager.AddEntity(newEntity2);
 
             //newEntity3 = new Entity("Wraith_Raider_Starship");
             //newEntity3.AddComponent(new ComponentPosition(0, 0, 0));
@@ -119,29 +121,31 @@ namespace OpenGL_Game.Scenes
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="e">Provides a snapshot of timing values.</param>
-        public override void Update(FrameEventArgs e)
+        public override void Update(FrameEventArgs e, KeyboardKeyEventArgs f)
         {
             dt = (float)e.Time;
             System.Console.WriteLine("fps=" + (int)(1.0 / dt));
 
             //TODO: Add your update logic here
 
-            switch (e.Key)
+            switch (f.Key)
             {
-                case System.Windows.Forms.Keys.Up:
+                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Up:
                     camera.MoveForward(0.1f);
                     break;
-                case System.Windows.Forms.Keys.Down:
+                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Down:
                     camera.MoveForward(-0.1f);
                     break;
-                case System.Windows.Forms.Keys.Left:
+                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Left:
                     camera.RotateY(-0.01f);
                     break;
-                case System.Windows.Forms.Keys.Right:
+                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Right:
                     camera.RotateY(0.01f);
                     break;
-                case System.Windows.Forms.Keys.M:
+                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.M:
                     sceneManager.StartMenu();
+                    break;
+                default:
                     break;
             }
 

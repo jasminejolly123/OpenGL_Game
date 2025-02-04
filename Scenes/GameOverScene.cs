@@ -25,7 +25,7 @@ namespace OpenGL_Game.Scenes
             GL.ClearColor(0.2f, 0.75f, 1.0f, 1.0f);
         }
 
-        public override void Update(FrameEventArgs e)
+        public override void Update(FrameEventArgs e, KeyboardKeyEventArgs f)
         {
         }
 

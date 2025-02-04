@@ -9,6 +9,7 @@ namespace OpenGL_Game.Components
         COMPONENT_GEOMETRY = 1 << 1,
         COMPONENT_VELOCITY = 1 << 2,
         COMPONENT_COLLISION_SPHERE = 1 << 3,
+        COMPONENT_COLLISION_WALL = 1 << 4,
     }
 
     interface IComponent
