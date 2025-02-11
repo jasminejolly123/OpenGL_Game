@@ -39,7 +39,7 @@ namespace OpenGL_Game.Scenes
             sceneManager.Title = "Game";
             // Set the Render and Update delegates to the Update and Render methods of this class
             sceneManager.renderer = Render;
-            sceneManager.updater = Update(e, f);
+            sceneManager.updater = Update;
             // Set Keyboard events to go to a method in this class
             sceneManager.keyboardDownDelegate += Keyboard_KeyDown;
             sceneManager.keyboardUpDelegate += Keyboard_KeyUp;
@@ -64,10 +64,10 @@ namespace OpenGL_Game.Scenes
         public void CreateEntities()
         {
             Entity newEntity;
-            Entity newEntity2;
-            Entity newEntity3;
-            Entity newEntity4;
-            Entity newEntity5;
+            //Entity newEntity2;
+            // Entity newEntity3;
+            // Entity newEntity4;
+            // Entity newEntity5;
 
             //newEntity = new Entity("Moon");
             //newEntity.AddComponent(new ComponentPosition(-2.0f, 0.0f, 0.0f));
@@ -93,12 +93,25 @@ namespace OpenGL_Game.Scenes
             //newEntity4.AddComponent(new ComponentGeometry("Geometry/Intergalactic_Spaceship/Intergalactic_Spaceship.obj"));
             //entityManager.AddEntity(newEntity4);
 
-            
 
-            newEntity5 = new Entity("Maze");
-            newEntity5.AddComponent(new ComponentPosition(0, 0, 0));
-            newEntity5.AddComponent(new ComponentGeometry("Geometry/Maze/maze.obj"));
-            entityManager.AddEntity(newEntity5);
+
+            newEntity = new Entity("Maze");
+            newEntity.AddComponent(new ComponentPosition(0, 0, 0));
+            newEntity.AddComponent(new ComponentGeometry("Geometry/Maze/maze.obj"));
+            entityManager.AddEntity(newEntity);
+
+            newEntity = new Entity("BB1");
+            newEntity.AddComponent(new ComponentCollisionWall(0));
+            entityManager.AddEntity(newEntity);
+            newEntity = new Entity("Moon");
+            newEntity.AddComponent(new ComponentPosition(-17, 0, 0));
+            newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
+            entityManager.AddEntity(newEntity);
+
+
+            //newEntity = new Entity("BB2");
+            //newEntity.AddComponent(new ComponentCollisionWall(1));
+            //entityManager.AddEntity(newEntity);
 
         }
 
@@ -114,6 +127,10 @@ namespace OpenGL_Game.Scenes
 
             newSystem = new SystemCollisionSphere();
             systemManager.AddSystem(newSystem);
+
+            newSystem = new SystemCollisionWall();
+            systemManager.AddSystem(newSystem);
+
         }
 
         /// <summary>
@@ -121,38 +138,43 @@ namespace OpenGL_Game.Scenes
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="e">Provides a snapshot of timing values.</param>
-        public override void Update(FrameEventArgs e, KeyboardKeyEventArgs f)
+        public override void Update(FrameEventArgs e)
         {
             dt = (float)e.Time;
             System.Console.WriteLine("fps=" + (int)(1.0 / dt));
 
             //TODO: Add your update logic here
 
-            switch (f.Key)
+            //switch (f.Key)
+            //{
+            //    case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Up:
+            //        camera.MoveForward(0.1f);
+            //        break;
+            //    case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Down:
+            //        camera.MoveForward(-0.1f);
+            //        break;
+            //    case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Left:
+            //        camera.RotateY(-0.01f);
+            //        break;
+            //    case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Right:
+            //        camera.RotateY(0.01f);
+            //        break;
+            //    case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.M:
+            //        sceneManager.StartMenu();
+            //        break;
+            //    default:
+            //        break;
+            //}
+
+            if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Up])
             {
-                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Up:
-                    camera.MoveForward(0.1f);
-                    break;
-                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Down:
-                    camera.MoveForward(-0.1f);
-                    break;
-                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Left:
-                    camera.RotateY(-0.01f);
-                    break;
-                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Right:
-                    camera.RotateY(0.01f);
-                    break;
-                case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.M:
-                    sceneManager.StartMenu();
-                    break;
-                default:
-                    break;
+                camera.MoveForward(2f * dt);
+            }
+            if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Down])
+            {
+                camera.MoveForward(-2f * dt);
             }
 
-            if (keysPressed[(char)System.Windows.Forms.Keys.Up])
-            {
-                camera.MoveForward(0.1f);
-            }
         }
 
 

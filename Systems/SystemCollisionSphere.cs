@@ -24,50 +24,50 @@ namespace OpenGL_Game.Systems
 
         public void OnAction(List<Entity> entities)
         {
-            if ((entities[0].Mask & entities[1].Mask) == MASK)
-            {
-                List<IComponent> components1 = entities[0].Components;
-                List<IComponent> components2 = entities[1].Components;
+            //if ((entities[0].Mask & entities[1].Mask) == MASK)
+            //{
+            //    List<IComponent> components1 = entities[0].Components;
+            //    List<IComponent> components2 = entities[1].Components;
 
-                IComponent collComponent1 = components1.Find(delegate (IComponent component)
-                {
-                    return component.ComponentType == ComponentTypes.COMPONENT_COLLISION_SPHERE;
-                });
-                IComponent collComponent2 = components2.Find(delegate (IComponent component)
-                {
-                    return component.ComponentType == ComponentTypes.COMPONENT_COLLISION_SPHERE;
-                });
+            //    IComponent collComponent1 = components1.Find(delegate (IComponent component)
+            //    {
+            //        return component.ComponentType == ComponentTypes.COMPONENT_COLLISION_SPHERE;
+            //    });
+            //    IComponent collComponent2 = components2.Find(delegate (IComponent component)
+            //    {
+            //        return component.ComponentType == ComponentTypes.COMPONENT_COLLISION_SPHERE;
+            //    });
 
-                ComponentCollisionSphere collision1 = (ComponentCollisionSphere) collComponent1;
-                ComponentCollisionSphere collision2 = (ComponentCollisionSphere) collComponent2;
+            //    ComponentCollisionSphere collision1 = (ComponentCollisionSphere) collComponent1;
+            //    ComponentCollisionSphere collision2 = (ComponentCollisionSphere) collComponent2;
 
-                IComponent posComponent1 = components1.Find(delegate (IComponent component)
-                {
-                    return component.ComponentType == ComponentTypes.COMPONENT_POSITION;
-                });
-                IComponent posComponent2 = components2.Find(delegate (IComponent component)
-                {
-                    return component.ComponentType == ComponentTypes.COMPONENT_POSITION;
-                });
+            //    IComponent posComponent1 = components1.Find(delegate (IComponent component)
+            //    {
+            //        return component.ComponentType == ComponentTypes.COMPONENT_POSITION;
+            //    });
+            //    IComponent posComponent2 = components2.Find(delegate (IComponent component)
+            //    {
+            //        return component.ComponentType == ComponentTypes.COMPONENT_POSITION;
+            //    });
 
-                ComponentPosition position1 = (ComponentPosition) posComponent1;
-                ComponentPosition position2 = (ComponentPosition)posComponent1;
+            //    ComponentPosition position1 = (ComponentPosition) posComponent1;
+            //    ComponentPosition position2 = (ComponentPosition)posComponent1;
 
-                IComponent velComponent1 = components1.Find(delegate (IComponent component)
-                {
-                    return component.ComponentType == ComponentTypes.COMPONENT_VELOCITY;
-                });
-                IComponent velComponent2 = components2.Find(delegate (IComponent component)
-                {
-                    return component.ComponentType == ComponentTypes.COMPONENT_VELOCITY;
-                });
+            //    IComponent velComponent1 = components1.Find(delegate (IComponent component)
+            //    {
+            //        return component.ComponentType == ComponentTypes.COMPONENT_VELOCITY;
+            //    });
+            //    IComponent velComponent2 = components2.Find(delegate (IComponent component)
+            //    {
+            //        return component.ComponentType == ComponentTypes.COMPONENT_VELOCITY;
+            //    });
 
-                ComponentVelocity velocity1 = (ComponentVelocity) velComponent1;
-                ComponentVelocity velocity2 = (ComponentVelocity) velComponent2;
+            //    ComponentVelocity velocity1 = (ComponentVelocity) velComponent1;
+            //    ComponentVelocity velocity2 = (ComponentVelocity) velComponent2;
 
-                Collision(entities[0], entities[1], position1, position2, collision1, collision2, velocity1, velocity2);
+            //    Collision(entities[0], entities[1], position1, position2, collision1, collision2, velocity1, velocity2);
 
-            }
+            //}
         }
 
         public void Collision(Entity object1, Entity object2, ComponentPosition position1, ComponentPosition position2, ComponentCollisionSphere collision1, ComponentCollisionSphere collision2, ComponentVelocity velocity1, ComponentVelocity velocity2)

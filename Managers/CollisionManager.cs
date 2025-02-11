@@ -24,10 +24,8 @@ namespace OpenGL_Game.Managers
         public CollisionManager()
         {
         }
-        //public abstract void ProcessCollisions()
-        //{
-            
-        //}
+
+        public abstract void ProcessCollisions();
     }
 
     
