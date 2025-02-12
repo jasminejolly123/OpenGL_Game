@@ -7,6 +7,7 @@ namespace OpenGL_Game
         public Matrix4 view, projection;
         public Vector3 cameraPosition, cameraDirection, cameraUp;
         private Vector3 targetPosition;
+        public float cameraradius;
 
         public Camera()
         {
@@ -22,6 +23,7 @@ namespace OpenGL_Game
             cameraUp = new Vector3(0.0f, 1.0f, 0.0f);
             cameraPosition = cameraPos;
             cameraDirection = targetPos-cameraPos;
+            cameraradius = 2;
             cameraDirection.Normalize();
             UpdateView();
             projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45), ratio, near, far);

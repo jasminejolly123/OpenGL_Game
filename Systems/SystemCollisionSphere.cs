@@ -12,6 +12,7 @@ namespace OpenGL_Game.Systems
     class SystemCollisionSphere : ISystem
     {
         const ComponentTypes MASK = (ComponentTypes.COMPONENT_POSITION | ComponentTypes.COMPONENT_COLLISION_SPHERE);
+        public Camera camera;
 
         public SystemCollisionSphere()
         {
@@ -22,7 +23,7 @@ namespace OpenGL_Game.Systems
             get { return "SystemCollisionSphere"; }
         }
 
-        public void OnAction(List<Entity> entities)
+        public void OnAction(List<Entity> entities, List<Camera> cameras)
         {
             //if ((entities[0].Mask & entities[1].Mask) == MASK)
             //{
@@ -68,14 +69,42 @@ namespace OpenGL_Game.Systems
             //    Collision(entities[0], entities[1], position1, position2, collision1, collision2, velocity1, velocity2);
 
             //}
+
+            foreach (Entity entity in entities)
+            {
+                if ((entity.Mask & MASK) == MASK)
+                {
+                    List<IComponent> components = entity.Components;
+
+                    IComponent posComponent = components.Find(delegate (IComponent component)
+                    {
+                        return component.ComponentType == ComponentTypes.COMPONENT_COLLISION_WALL;
+                    });
+                    ComponentCollisionSphere position = (ComponentCollisionSphere) posComponent;
+
+                    IComponent collComponent = components.Find(delegate (IComponent component)
+                    {
+                    return component.ComponentType == ComponentTypes.COMPONENT_COLLISION_SPHERE;
+                    });
+                    ComponentCollisionSphere collision = (ComponentCollisionSphere) collComponent;
+
+                    IComponent velComponent = components.Find(delegate (IComponent component)
+                    {
+                        return component.ComponentType == ComponentTypes.COMPONENT_VELOCITY;
+                    });
+                    ComponentVelocity velocity1 = (ComponentVelocity) velComponent;
+
+                    //Collision()
+                }
+            }
         }
 
-        public void Collision(Entity object1, Entity object2, ComponentPosition position1, ComponentPosition position2, ComponentCollisionSphere collision1, ComponentCollisionSphere collision2, ComponentVelocity velocity1, ComponentVelocity velocity2)
+        public void Collision(ComponentPosition position, ComponentCollisionSphere collision, ComponentVelocity velocity)
         {
-            if ((position1.Position - position2.Position).Length < collision1.Radius + collision2.Radius)
+            if ((position.Position - camera.cameraPosition).Length < collision.Radius + 2)
             {
-                velocity1.Velocity = velocity1.Velocity * -1;
-                velocity2.Velocity = velocity2.Velocity * -1;
+                //camera.cameraVelocity = velocity1.Velocity * -1;
+                //velocity2.Velocity = velocity2.Velocity * -1;
             }
         }
     }

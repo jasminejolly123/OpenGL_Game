@@ -12,12 +12,13 @@ namespace OpenGL_Game.Managers
         {
         }
 
-        public void ActionSystems(EntityManager entityManager)
+        public void ActionSystems(EntityManager entityManager, CameraManager cameraManager)
         {
             List<Entity> entityList = entityManager.Entities();
-            foreach(ISystem system in systemList)
+            List<Camera> cameraList = cameraManager.Cameras();
+            foreach (ISystem system in systemList)
             {
-                system.OnAction(entityList);
+                system.OnAction(entityList, cameraList);
             }
         }
 

@@ -23,7 +23,7 @@ namespace OpenGL_Game.Systems
             get { return "SystemPhysics"; }
         }
 
-        public void OnAction(List<Entity> entities)    
+        public void OnAction(List<Entity> entities, List<Camera> cameras)    
         {
             foreach (Entity entity in entities)
             {

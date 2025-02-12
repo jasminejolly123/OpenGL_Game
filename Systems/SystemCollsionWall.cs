@@ -12,6 +12,7 @@ namespace OpenGL_Game.Systems
     class SystemCollisionWall : ISystem
     {
         const ComponentTypes MASK = (ComponentTypes.COMPONENT_COLLISION_WALL);
+        public Camera camera;
 
         public SystemCollisionWall()
         {
@@ -22,7 +23,7 @@ namespace OpenGL_Game.Systems
             get { return "SystemCollisionWall"; }
         }
 
-        public void OnAction(List<Entity> entities)
+        public void OnAction(List<Entity> entities, List<Camera> cameras)
         {
             foreach (Entity entity in entities)
             {
@@ -36,6 +37,25 @@ namespace OpenGL_Game.Systems
                     });
                     ComponentCollisionWall bb = ((ComponentCollisionWall)colComponent);
 
+                    foreach (Camera camera in cameras)
+                    {
+                        if (camera.cameraPosition.X >= bb.MaxX)
+                        {
+                            camera.cameraPosition.X = camera.cameraPosition.X - 1;
+                        }
+                        if (camera.cameraPosition.X <= bb.MinX)
+                        {
+                            camera.cameraPosition.X = camera.cameraPosition.X + 1;
+                        }
+                        if (camera.cameraPosition.Z >= bb.MaxZ)
+                        {
+                            camera.cameraPosition.Z = camera.cameraPosition.Z - 1;
+                        }
+                        if (camera.cameraPosition.Z <= bb.MaxZ)
+                        {
+                            camera.cameraPosition.Z = camera.cameraPosition.Z + 1;
+                        }
+                    }
 
                 }
             }

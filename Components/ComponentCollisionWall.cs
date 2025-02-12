@@ -8,17 +8,38 @@ namespace OpenGL_Game.Components
 {
     class ComponentCollisionWall : IComponent
     {
-        float radius;
+        float minX;
+        float maxX;
+        float minZ;
+        float maxZ;
 
-        public ComponentCollisionWall(float radius)
+        public ComponentCollisionWall(float minX, float maxX, float minZ, float maxZ)
         {
-            this.radius = radius;
+            this.minX = minX;
+            this.maxX = maxX;
+            this.minZ = minZ;
+            this.maxZ = maxZ;
         }
 
-        public float Radius
+        public float MinX
         {
-            get { return radius; }
-            set { radius = value; }
+            get { return minX; }
+            set { minX = value; }
+        }
+        public float MaxX
+        {
+            get { return maxX; }
+            set { maxX = value; }
+        }
+        public float MinZ
+        {
+            get { return minZ; }
+            set { minZ = value; }
+        }
+        public float MaxZ
+        {
+            get { return maxZ; }
+            set { maxZ = value; }
         }
 
         public ComponentTypes ComponentType

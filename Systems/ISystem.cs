@@ -5,7 +5,7 @@ namespace OpenGL_Game.Systems
 {
     interface ISystem
     {
-        void OnAction(List<Entity> entities);
+        void OnAction(List<Entity> entities, List<Camera> cameras);
 
         // Property signatures: 
         string Name

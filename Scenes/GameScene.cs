@@ -23,7 +23,9 @@ namespace OpenGL_Game.Scenes
         public static float dt = 0;
         EntityManager entityManager;
         SystemManager systemManager;
+        CameraManager cameraManager;
         public Camera camera;
+        //public Camera camera;
         public static GameScene gameInstance;
         public bool[] keysPressed = new bool[500];
         FrameEventArgs e;
@@ -34,6 +36,7 @@ namespace OpenGL_Game.Scenes
             gameInstance = this;
             entityManager = new EntityManager();
             systemManager = new SystemManager();
+            cameraManager = new CameraManager();
 
             // Set the title of the window
             sceneManager.Title = "Game";
@@ -52,48 +55,25 @@ namespace OpenGL_Game.Scenes
 
             GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-            // Set Camera
-            camera = new Camera(new OpenTK.Mathematics.Vector3(0, 4, 7), new OpenTK.Mathematics.Vector3(0, 0, 0), (float)(sceneManager.Size.X) / (float)(sceneManager.Size.Y), 0.1f, 100f);
-
+            CreateCamera();
             CreateEntities();
             CreateSystems();
 
             // TODO: Add your initialization logic here
         }
 
+        Camera newCamera;
+
+        public void CreateCamera()
+        {
+
+            newCamera = new Camera(new OpenTK.Mathematics.Vector3(0, 2, 7), new OpenTK.Mathematics.Vector3(0, 0, 0), (float)(sceneManager.Size.X) / (float)(sceneManager.Size.Y), 0.1f, 100f);
+            cameraManager.AddCamera(newCamera);
+        }
+
         public void CreateEntities()
         {
             Entity newEntity;
-            //Entity newEntity2;
-            // Entity newEntity3;
-            // Entity newEntity4;
-            // Entity newEntity5;
-
-            //newEntity = new Entity("Moon");
-            //newEntity.AddComponent(new ComponentPosition(-2.0f, 0.0f, 0.0f));
-            //newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
-            //newEntity.AddComponent(new ComponentVelocity(1, 0, 0));
-            //newEntity.AddComponent(new ComponentCollisionSphere(1));
-            //entityManager.AddEntity(newEntity);
-
-            //newEntity2 = new Entity("Wraith_Raider_Starship");
-            //newEntity2.AddComponent(new ComponentPosition(2, 0, 0));
-            //newEntity2.AddComponent(new ComponentGeometry("Geometry/Wraith_Raider_Starship/Wraith_Raider_Starship.obj"));
-            //newEntity.AddComponent(new ComponentVelocity(-1, 0, 0));
-            //newEntity.AddComponent(new ComponentCollisionSphere(1));
-            //entityManager.AddEntity(newEntity2);
-
-            //newEntity3 = new Entity("Wraith_Raider_Starship");
-            //newEntity3.AddComponent(new ComponentPosition(0, 0, 0));
-            //newEntity3.AddComponent(new ComponentGeometry("Geometry/Wraith_Raider_Starship/Wraith_Raider_Starship.obj"));
-            //entityManager.AddEntity(newEntity3);
-
-            //newEntity4 = new Entity("Intergalactic_Spaceship");
-            //newEntity4.AddComponent(new ComponentPosition(0.0f, 0.0f, 0.0f));
-            //newEntity4.AddComponent(new ComponentGeometry("Geometry/Intergalactic_Spaceship/Intergalactic_Spaceship.obj"));
-            //entityManager.AddEntity(newEntity4);
-
-
 
             newEntity = new Entity("Maze");
             newEntity.AddComponent(new ComponentPosition(0, 0, 0));
@@ -101,12 +81,12 @@ namespace OpenGL_Game.Scenes
             entityManager.AddEntity(newEntity);
 
             newEntity = new Entity("BB1");
-            newEntity.AddComponent(new ComponentCollisionWall(0));
+            newEntity.AddComponent(new ComponentCollisionWall(-0.5f, 17.5f, -0.5f, 1.5f));
             entityManager.AddEntity(newEntity);
-            newEntity = new Entity("Moon");
-            newEntity.AddComponent(new ComponentPosition(-17, 0, 0));
-            newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
-            entityManager.AddEntity(newEntity);
+            //newEntity = new Entity("Moon");
+            //newEntity.AddComponent(new ComponentPosition(-17, 0, 0));
+            //newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
+            //entityManager.AddEntity(newEntity);
 
 
             //newEntity = new Entity("BB2");
@@ -168,11 +148,19 @@ namespace OpenGL_Game.Scenes
 
             if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Up])
             {
-                camera.MoveForward(2f * dt);
+                newCamera.MoveForward(5f * dt);
             }
             if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Down])
             {
-                camera.MoveForward(-2f * dt);
+                newCamera.MoveForward(-5f * dt);
+            }
+            if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Right])
+            {
+                newCamera.RotateY(2 * dt);
+            }
+            if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Left])
+            {
+                newCamera.RotateY(-2 * dt);
             }
 
         }
@@ -189,7 +177,7 @@ namespace OpenGL_Game.Scenes
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             // Action ALL systems
-            systemManager.ActionSystems(entityManager);
+            systemManager.ActionSystems(entityManager, cameraManager);
 
             // Render score
             GUI.DrawText("Score: 000", 30, 80, 30, 255, 255, 255);

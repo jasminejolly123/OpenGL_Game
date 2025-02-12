@@ -69,7 +69,7 @@ namespace OpenGL_Game.Systems
             get { return "SystemRender"; }
         }
 
-        public void OnAction(List<Entity>entities)
+        public void OnAction(List<Entity>entities, List<Camera> cameras)
         {
             foreach (Entity entity in entities)
             {
@@ -90,12 +90,12 @@ namespace OpenGL_Game.Systems
                     Vector3 position = ((ComponentPosition)positionComponent).Position;
                     Matrix4 model = Matrix4.CreateTranslation(position);
 
-                    Draw(model, geometry);
+                    Draw(model, geometry, cameras);
                 }
             }
         }
 
-        public void Draw(Matrix4 model, Geometry geometry)
+        public void Draw(Matrix4 model, Geometry geometry, List<Camera> cameras)
         {
             GL.UseProgram(pgmID);
 
@@ -103,8 +103,12 @@ namespace OpenGL_Game.Systems
             GL.ActiveTexture(TextureUnit.Texture0);
 
             GL.UniformMatrix4(uniform_mmodel, false, ref model);
-            Matrix4 modelViewProjection = model * GameScene.gameInstance.camera.view * GameScene.gameInstance.camera.projection;
-            GL.UniformMatrix4(uniform_mmodelviewproj, false, ref modelViewProjection);
+            
+            foreach(Camera camera in cameras)
+            {
+                Matrix4 modelViewProjection = model * camera.view * camera.projection;
+                GL.UniformMatrix4(uniform_mmodelviewproj, false, ref modelViewProjection);
+            }
 
             geometry.Render(uniform_diffuse);
 
