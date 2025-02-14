@@ -47,7 +47,7 @@ namespace OpenGL_Game.Systems
                         {
                             camera.cameraPosition.X = camera.cameraPosition.X + 1;
                         }
-                        if (camera.cameraPosition.Z >= bb.MaxZ)
+                        if (camera.cameraPosition.Z >= bb.MinZ)
                         {
                             camera.cameraPosition.Z = camera.cameraPosition.Z - 1;
                         }

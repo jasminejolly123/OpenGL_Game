@@ -67,7 +67,7 @@ namespace OpenGL_Game.Scenes
         public void CreateCamera()
         {
 
-            newCamera = new Camera(new OpenTK.Mathematics.Vector3(0, 2, 7), new OpenTK.Mathematics.Vector3(0, 0, 0), (float)(sceneManager.Size.X) / (float)(sceneManager.Size.Y), 0.1f, 100f);
+            newCamera = new Camera(new OpenTK.Mathematics.Vector3(-5, 2, 7), new OpenTK.Mathematics.Vector3(0, 0, 0), (float)(sceneManager.Size.X) / (float)(sceneManager.Size.Y), 0.1f, 100f);
             cameraManager.AddCamera(newCamera);
         }
 
@@ -81,8 +81,21 @@ namespace OpenGL_Game.Scenes
             entityManager.AddEntity(newEntity);
 
             newEntity = new Entity("BB1");
-            newEntity.AddComponent(new ComponentCollisionWall(-0.5f, 17.5f, -0.5f, 1.5f));
+            newEntity.AddComponent(new ComponentCollisionWall(-100000000, 10000000, 100000000, 1.5f));
             entityManager.AddEntity(newEntity);
+
+            newEntity = new Entity("BB2");
+            newEntity.AddComponent(new ComponentCollisionWall(-100000000, 10000000, 52, -10000000));
+            entityManager.AddEntity(newEntity);
+
+            newEntity = new Entity("BB3");
+            newEntity.AddComponent(new ComponentCollisionWall(-100000000, -2, 100000000, -10000000));
+            entityManager.AddEntity(newEntity);
+
+            newEntity = new Entity("BB1");
+            newEntity.AddComponent(new ComponentCollisionWall(-52, 10000000, 100000000, -100000000));
+            entityManager.AddEntity(newEntity);
+
             //newEntity = new Entity("Moon");
             //newEntity.AddComponent(new ComponentPosition(-17, 0, 0));
             //newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
