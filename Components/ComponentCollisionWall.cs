@@ -12,13 +12,15 @@ namespace OpenGL_Game.Components
         float maxX;
         float minZ;
         float maxZ;
+        int type;
 
-        public ComponentCollisionWall(float minX, float maxX, float minZ, float maxZ)
+        public ComponentCollisionWall(float minX, float maxX, float minZ, float maxZ, int type)
         {
             this.minX = minX;
             this.maxX = maxX;
             this.minZ = minZ;
             this.maxZ = maxZ;
+            this.type = type;
         }
 
         public float MinX
@@ -40,6 +42,12 @@ namespace OpenGL_Game.Components
         {
             get { return maxZ; }
             set { maxZ = value; }
+        }
+
+        public int Type
+        {
+            get { return type; }
+            set { type = value; }
         }
 
         public ComponentTypes ComponentType

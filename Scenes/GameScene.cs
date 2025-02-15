@@ -81,19 +81,39 @@ namespace OpenGL_Game.Scenes
             entityManager.AddEntity(newEntity);
 
             newEntity = new Entity("BB1");
-            newEntity.AddComponent(new ComponentCollisionWall(-100000000, 10000000, 100000000, 1.5f));
+            newEntity.AddComponent(new ComponentCollisionWall(-100000000, 10000000, 100000000, 1.5f, 1));
             entityManager.AddEntity(newEntity);
 
             newEntity = new Entity("BB2");
-            newEntity.AddComponent(new ComponentCollisionWall(-100000000, 10000000, 52, -10000000));
+            newEntity.AddComponent(new ComponentCollisionWall(-100000000, 10000000, 52, -10000000, 1));
             entityManager.AddEntity(newEntity);
 
             newEntity = new Entity("BB3");
-            newEntity.AddComponent(new ComponentCollisionWall(-100000000, -2, 100000000, -10000000));
+            newEntity.AddComponent(new ComponentCollisionWall(-100000000, -2, 100000000, -10000000, 1));
             entityManager.AddEntity(newEntity);
 
-            newEntity = new Entity("BB1");
-            newEntity.AddComponent(new ComponentCollisionWall(-52, 10000000, 100000000, -100000000));
+            newEntity = new Entity("BB4");
+            newEntity.AddComponent(new ComponentCollisionWall(-52, 10000000, 100000000, -100000000, 1));
+            entityManager.AddEntity(newEntity);
+
+            newEntity = new Entity("BB5");
+            newEntity.AddComponent(new ComponentCollisionWall(-27, -15.5f, 10.5f, 22, 2));
+            entityManager.AddEntity(newEntity);
+
+            newEntity = new Entity("BB13");
+            newEntity.AddComponent(new ComponentCollisionWall(-42, -15.5f, 6.5f, -10000000, 3));
+            entityManager.AddEntity(newEntity);
+
+            newEntity = new Entity("BB14");
+            newEntity.AddComponent(new ComponentCollisionWall(-42, -15.5f, 1000000, 50, 3));
+            entityManager.AddEntity(newEntity);
+
+            newEntity = new Entity("BB15");
+            newEntity.AddComponent(new ComponentCollisionWall(-6.5f, 1000000, 15.5f, 41.5f, 4));
+            entityManager.AddEntity(newEntity);
+
+            newEntity = new Entity("BB16");
+            newEntity.AddComponent(new ComponentCollisionWall(-1000000, -50, 15.5f, 41.5f, 4));
             entityManager.AddEntity(newEntity);
 
             //newEntity = new Entity("Moon");

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenGL_Game.Scenes;
 
 namespace OpenGL_Game.Systems
 {
@@ -13,7 +14,7 @@ namespace OpenGL_Game.Systems
     {
         const ComponentTypes MASK = (ComponentTypes.COMPONENT_COLLISION_WALL);
         public Camera camera;
-
+        //public bool[] keysPressed = new bool[500];
         public SystemCollisionWall()
         {
         }
@@ -28,7 +29,7 @@ namespace OpenGL_Game.Systems
             foreach (Entity entity in entities)
             {
                 if ((entity.Mask & MASK) == MASK)
-                {
+                {            
                     List<IComponent> components = entity.Components;
 
                     IComponent colComponent = components.Find(delegate (IComponent component)
@@ -39,22 +40,77 @@ namespace OpenGL_Game.Systems
 
                     foreach (Camera camera in cameras)
                     {
-                        if (camera.cameraPosition.X >= bb.MaxX)
+                        if (camera.cameraPosition.Y > 2)
                         {
-                            camera.cameraPosition.X = camera.cameraPosition.X - 1;
+                            camera.cameraPosition.Y = camera.cameraPosition.Y - 0.5f;
                         }
-                        if (camera.cameraPosition.X <= bb.MinX)
+                        if (camera.cameraPosition.Y < 1)
                         {
-                            camera.cameraPosition.X = camera.cameraPosition.X + 1;
+                            camera.cameraPosition.Y = camera.cameraPosition.Y + 0.5f;
                         }
-                        if (camera.cameraPosition.Z >= bb.MinZ)
+
+                        if (bb.Type == 1)
                         {
-                            camera.cameraPosition.Z = camera.cameraPosition.Z - 1;
+                            if (camera.cameraPosition.X >= bb.MaxX)
+                            {
+                                camera.cameraPosition.X = camera.cameraPosition.X - 1;
+                            }
+                            if (camera.cameraPosition.X <= bb.MinX)
+                            {
+                                camera.cameraPosition.X = camera.cameraPosition.X + 1;
+                            }
+                            if (camera.cameraPosition.Z >= bb.MinZ)
+                            {
+                                camera.cameraPosition.Z = camera.cameraPosition.Z - 1;
+                            }
+                            if (camera.cameraPosition.Z <= bb.MaxZ)
+                            {
+                                camera.cameraPosition.Z = camera.cameraPosition.Z + 1;
+                            }
                         }
-                        if (camera.cameraPosition.Z <= bb.MaxZ)
+                        //if (bb.Type == 2)
+                        //{
+                        //    if (camera.cameraPosition.X <= bb.MaxX && camera.cameraPosition.X >= bb.MinX && camera.cameraPosition.Z <= bb.MaxZ && camera.cameraPosition.Z >= bb.MinZ)
+                        //    {
+                        //        if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Up])
+                        //        {
+                        //            camera.MoveForward(-15f * GameScene.dt);
+                        //        }
+                        //        if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Down])
+                        //        {
+                        //            camera.MoveForward(15f * GameScene.dt);
+                        //        }
+                        //    }
+                        //}
+                        if (bb.Type == 3)
                         {
-                            camera.cameraPosition.Z = camera.cameraPosition.Z + 1;
+                            if (camera.cameraPosition.X <= bb.MaxX && camera.cameraPosition.X > bb.MinX)
+                            {
+                                if (camera.cameraPosition.Z <= bb.MinZ)
+                                {
+                                    camera.cameraPosition.Z = camera.cameraPosition.Z + 1;
+                                }
+                                if(camera.cameraPosition.Z >= bb.MaxZ)
+                                {
+                                    camera.cameraPosition.Z = camera.cameraPosition.Z - 1;
+                                }
+                            }
                         }
+                        if (bb.Type == 4)
+                        {
+                            if (camera.cameraPosition.Z <= bb.MaxZ && camera.cameraPosition.Z > bb.MinZ)
+                            {
+                                if (camera.cameraPosition.X <= bb.MinX)
+                                {
+                                    camera.cameraPosition.X = camera.cameraPosition.X + 1;
+                                }
+                                if (camera.cameraPosition.X >= bb.MaxX)
+                                {
+                                    camera.cameraPosition.X = camera.cameraPosition.X - 1;
+                                }
+                            }
+                        }
+
                     }
 
                 }
