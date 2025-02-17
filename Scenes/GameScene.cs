@@ -75,6 +75,11 @@ namespace OpenGL_Game.Scenes
         {
             Entity newEntity;
 
+            newEntity = new Entity("Ball1");
+            newEntity.AddComponent(new ComponentPosition(0, 0, 0));
+            newEntity.AddComponent(new ComponentGeometry("Geometry/Ball/ball.obj"));
+            entityManager.AddEntity(newEntity);
+
             newEntity = new Entity("Maze");
             newEntity.AddComponent(new ComponentPosition(0, 0, 0));
             newEntity.AddComponent(new ComponentGeometry("Geometry/Maze/maze.obj"));
@@ -117,7 +122,7 @@ namespace OpenGL_Game.Scenes
             entityManager.AddEntity(newEntity);
 
             //newEntity = new Entity("Moon");
-            //newEntity.AddComponent(new ComponentPosition(-17, 0, 0));
+            //newEntity.AddComponent(new ComponentPosition(0, 0, 0));
             //newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
             //entityManager.AddEntity(newEntity);
 
