@@ -68,20 +68,28 @@ namespace OpenGL_Game.Systems
                                 camera.cameraPosition.Z = camera.cameraPosition.Z + 1;
                             }
                         }
-                        //if (bb.Type == 2)
-                        //{
-                        //    if (camera.cameraPosition.X <= bb.MaxX && camera.cameraPosition.X >= bb.MinX && camera.cameraPosition.Z <= bb.MaxZ && camera.cameraPosition.Z >= bb.MinZ)
-                        //    {
-                        //        if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Up])
-                        //        {
-                        //            camera.MoveForward(-15f * GameScene.dt);
-                        //        }
-                        //        if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Down])
-                        //        {
-                        //            camera.MoveForward(15f * GameScene.dt);
-                        //        }
-                        //    }
-                        //}
+                        if (bb.Type == 2)
+                        {
+                            if (camera.cameraPosition.X <= bb.MaxX && camera.cameraPosition.X >= bb.MinX && camera.cameraPosition.Z <= bb.MaxZ && camera.cameraPosition.Z >= bb.MinZ)
+                            {
+                                if (camera.cameraPosition.X == bb.MaxX)
+                                {
+                                    camera.cameraPosition.X -= 5;
+                                }
+                                if (camera.cameraPosition.X == bb.MinX)
+                                {
+                                    camera.cameraPosition.X += 5;
+                                }
+                                if (camera.cameraPosition.Z == bb.MaxZ)
+                                {
+                                    camera.cameraPosition.Z -= 5;
+                                }
+                                if (camera.cameraPosition.Z == bb.MinZ)
+                                {
+                                    camera.cameraPosition.Z += 5;
+                                }
+                            }
+                        }
                         if (bb.Type == 3)
                         {
                             if (camera.cameraPosition.X <= bb.MaxX && camera.cameraPosition.X > bb.MinX)
