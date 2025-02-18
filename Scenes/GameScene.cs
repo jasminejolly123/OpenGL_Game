@@ -76,12 +76,14 @@ namespace OpenGL_Game.Scenes
             Entity newEntity;
 
             newEntity = new Entity("Ball1");
-            newEntity.AddComponent(new ComponentPosition(0, 0, 0));
-            newEntity.AddComponent(new ComponentGeometry("Geometry/Ball/ball.obj"));
+            newEntity.AddComponent(new ComponentPosition(-5, 0, 1));
+            newEntity.AddComponent(new ComponentScale(0.5f, 0.5f, 0.5f));
+            newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
             entityManager.AddEntity(newEntity);
 
             newEntity = new Entity("Maze");
             newEntity.AddComponent(new ComponentPosition(0, 0, 0));
+            newEntity.AddComponent(new ComponentScale(1, 1, 1));
             newEntity.AddComponent(new ComponentGeometry("Geometry/Maze/maze.obj"));
             entityManager.AddEntity(newEntity);
 

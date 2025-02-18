@@ -80,10 +80,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Geometry\Moon\moon.mtl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Geometry\Moon\moon.obj">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Geometry\Ball\moonnew.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Geometry\Moon_Blender_41\moon41.mtl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -189,8 +192,8 @@
     <Content Include="Geometry\Default\default.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Geometry\Ball\moon_diffuse.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="Geometry\Moon\moon_diffuse.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Geometry\Wraith_Raider_Starship\bmq1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

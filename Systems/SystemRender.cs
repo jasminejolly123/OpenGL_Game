@@ -12,7 +12,7 @@ namespace OpenGL_Game.Systems
 {
     class SystemRender : ISystem
     {
-        const ComponentTypes MASK = (ComponentTypes.COMPONENT_POSITION | ComponentTypes.COMPONENT_GEOMETRY);
+        const ComponentTypes MASK = (ComponentTypes.COMPONENT_POSITION | ComponentTypes.COMPONENT_GEOMETRY | ComponentTypes.COMPONENT_SCALE);
 
         protected int pgmID;
         protected int vsID;
@@ -90,12 +90,19 @@ namespace OpenGL_Game.Systems
                     Vector3 position = ((ComponentPosition)positionComponent).Position;
                     Matrix4 model = Matrix4.CreateTranslation(position);
 
-                    Draw(model, geometry, cameras);
+                    IComponent scaleComponent = components.Find(delegate (IComponent component)
+                    {
+                        return component.ComponentType == ComponentTypes.COMPONENT_SCALE;
+                    });
+                    Vector3 scale = ((ComponentPosition)positionComponent).Position;
+                    Matrix4 model2 = Matrix4.CreateScale(scale);
+
+                    Draw(model, model2, geometry, cameras);
                 }
             }
         }
 
-        public void Draw(Matrix4 model, Geometry geometry, List<Camera> cameras)
+        public void Draw(Matrix4 model, Matrix4 model2, Geometry geometry, List<Camera> cameras)
         {
             GL.UseProgram(pgmID);
 
@@ -103,8 +110,9 @@ namespace OpenGL_Game.Systems
             GL.ActiveTexture(TextureUnit.Texture0);
 
             GL.UniformMatrix4(uniform_mmodel, false, ref model);
-            
-            foreach(Camera camera in cameras)
+            GL.UniformMatrix4(uniform_mmodel, false, ref model2);
+
+            foreach (Camera camera in cameras)
             {
                 Matrix4 modelViewProjection = model * camera.view * camera.projection;
                 GL.UniformMatrix4(uniform_mmodelviewproj, false, ref modelViewProjection);
