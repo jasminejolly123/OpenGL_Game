@@ -2,7 +2,7 @@
 
 namespace OpenGL_Game
 {
-    class Camera
+    public class Camera
     {
         public Matrix4 view, projection;
         public Vector3 oldCameraPosition, cameraPosition, cameraDirection, cameraUp;

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using OpenGL_Game.Components;
 namespace OpenGL_Game.Objects
 {
-     class Entity
+     public class Entity
     {
         string name;
         List<IComponent> componentList = new List<IComponent>();
@@ -15,7 +15,7 @@ namespace OpenGL_Game.Objects
             this.name = name;
         }
         /// <summary>Adds a single component</summary>
-        void AddComponent(IComponent component)
+        public void AddComponent(IComponent component)
         {
             Debug.Assert(component != null, "Component cannot be null");
             componentList.Add(component);

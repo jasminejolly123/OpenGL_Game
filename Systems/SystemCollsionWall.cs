@@ -14,6 +14,7 @@ namespace OpenGL_Game.Systems
     {
         const ComponentTypes MASK = (ComponentTypes.COMPONENT_COLLISION_WALL);
         public Camera camera;
+        public CollisionManager collisionManager;
         //public bool[] keysPressed = new bool[500];
         public SystemCollisionWall()
         {
@@ -67,13 +68,16 @@ namespace OpenGL_Game.Systems
                             {
                                 camera.cameraPosition.Z = camera.cameraPosition.Z + 1;
                             }
+                            //collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
                         }
                         if (bb.Type == 2)
                         {
                             if (camera.cameraPosition.X <= bb.MaxX && camera.cameraPosition.X >= bb.MinX && camera.cameraPosition.Z <= bb.MaxZ && camera.cameraPosition.Z >= bb.MinZ)
                             {
 
-                                camera.PutBack();
+                                //camera.PutBack();
+
+                                collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
                                 //if (camera.cameraPosition.X < bb.MaxX)
                                 //{
                                 //    camera.cameraPosition.X += 5;

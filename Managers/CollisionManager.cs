@@ -6,24 +6,26 @@ namespace OpenGL_Game.Managers
 {
 
 
-    enum COLLISIONTYPE
+    public enum COLLISIONTYPE
     {
         SPHERE_SPHERE,
         LINE_SPHERE
     }
 
-    struct Collision
+    public struct Collision
     {
         public Entity entity;
         public COLLISIONTYPE collisionType;
     }
+
     
     public abstract class CollisionManager
     {
+        public Camera camera;
         List<Collision> collisionManifold = new List<Collision>();
         public CollisionManager() { }
         public void ClearManifold() { collisionManifold.Clear(); }
-        private void CollisionBetweenCamera(Entity entity, COLLISIONTYPE collisionType)
+        public void CollisionBetweenCamera(Entity entity, COLLISIONTYPE collisionType)
         {
             // If we already have this collision in the manifold then do not add it
             foreach (Collision coll in collisionManifold)
@@ -36,7 +38,7 @@ namespace OpenGL_Game.Managers
             collisionManifold.Add(collision);
         }
 
-        public abstract void ProcessCollisions();
+        public abstract void ProcessCollisions(CameraManager cameraManager);
     }
 
     

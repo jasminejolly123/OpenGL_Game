@@ -8,9 +8,24 @@ namespace OpenGL_Game.Managers
 {
     public class MazeEscapeCollisionManager : CollisionManager
     {
-        public override void ProcessCollisions()
+        public override void ProcessCollisions(CameraManager cameraManager)
         {
-            //throw new NotImplementedException();
+            //Collision collision;
+            //if (collision.collisionType == COLLISIONTYPE.LINE_SPHERE)
+            //{
+
+            //}
+            //else
+            //{
+            //    foreach (Camera camera in cameraManager.cameraList)
+            //    {
+            //        camera.PutBack();
+            //    }
+            //}
+            foreach (Camera camera in cameraManager.cameraList)
+            {
+                camera.PutBack();
+            }
         }
     }
 }

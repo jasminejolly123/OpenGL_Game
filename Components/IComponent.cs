@@ -3,7 +3,7 @@
 namespace OpenGL_Game.Components
 {
     [FlagsAttribute]
-    enum ComponentTypes {
+    public enum ComponentTypes {
         COMPONENT_NONE     = 0,
 	    COMPONENT_POSITION = 1 << 0,
         COMPONENT_GEOMETRY = 1 << 1,
@@ -13,7 +13,7 @@ namespace OpenGL_Game.Components
         COMPONENT_SCALE = 1 << 5,
     }
 
-    interface IComponent
+    public interface IComponent
     {
         ComponentTypes ComponentType
         {

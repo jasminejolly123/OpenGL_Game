@@ -227,7 +227,11 @@ namespace OpenGL_Game.Scenes
             // Action ALL systems
             systemManager.ActionSystems(entityManager, cameraManager);
 
-            collisionManager.ProcessCollisions();
+            if (collisionManager != null)
+            {
+                collisionManager.ProcessCollisions(cameraManager);
+            }
+            //collisionManager.ProcessCollisions(cameraManager);
 
             // Render score
             GUI.DrawText("Score: 000", 30, 80, 30, 255, 255, 255);

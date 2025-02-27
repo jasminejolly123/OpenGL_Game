@@ -4,9 +4,9 @@ using OpenGL_Game.Objects;
 
 namespace OpenGL_Game.Managers
 {
-    class CameraManager
+    public class CameraManager
     {
-        List<Camera> cameraList;
+        public List<Camera> cameraList;
 
         public CameraManager()
         {
