@@ -7,24 +7,23 @@ using OpenGL_Game.OBJLoader;
 using OpenGL_Game.Objects;
 using OpenGL_Game.Scenes;
 using OpenTK.Mathematics;
-using System.Xml.Linq;
 
 namespace OpenGL_Game.Systems
 {
-    class SystemPhysics : ISystem
+    class SystemBallPath : ISystem
     {
         const ComponentTypes MASK = (ComponentTypes.COMPONENT_POSITION | ComponentTypes.COMPONENT_VELOCITY);
 
-        public SystemPhysics()
+        public SystemBallPath()
         {
         }
 
         public string Name
         {
-            get { return "SystemPhysics"; }
+            get { return "SystemBallPath"; }
         }
 
-        public void OnAction(List<Entity> entities, List<Camera> cameras)    
+        public void OnAction(List<Entity> entities, List<Camera> cameras)
         {
             foreach (Entity entity in entities)
             {
@@ -48,8 +47,6 @@ namespace OpenGL_Game.Systems
 
         public void Motion(ComponentPosition position, ComponentVelocity velocity, string name)
         {
-            position.position = position.position + velocity.Velocity * GameScene.dt;
-
             if (name == "Ball1")
             {
                 bool flag = true;
