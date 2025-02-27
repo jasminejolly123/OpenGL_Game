@@ -72,22 +72,24 @@ namespace OpenGL_Game.Systems
                         {
                             if (camera.cameraPosition.X <= bb.MaxX && camera.cameraPosition.X >= bb.MinX && camera.cameraPosition.Z <= bb.MaxZ && camera.cameraPosition.Z >= bb.MinZ)
                             {
-                                if (camera.cameraPosition.X == bb.MaxX)
-                                {
-                                    camera.cameraPosition.X -= 5;
-                                }
-                                if (camera.cameraPosition.X == bb.MinX)
-                                {
-                                    camera.cameraPosition.X += 5;
-                                }
-                                if (camera.cameraPosition.Z == bb.MaxZ)
-                                {
-                                    camera.cameraPosition.Z -= 5;
-                                }
-                                if (camera.cameraPosition.Z == bb.MinZ)
-                                {
-                                    camera.cameraPosition.Z += 5;
-                                }
+
+                                camera.PutBack();
+                                //if (camera.cameraPosition.X < bb.MaxX)
+                                //{
+                                //    camera.cameraPosition.X += 5;
+                                //}
+                                //if (camera.cameraPosition.X == bb.MinX)
+                                //{
+                                //    camera.cameraPosition.X += 5;
+                                //}
+                                //if (camera.cameraPosition.Z == bb.MaxZ)
+                                //{
+                                //    camera.cameraPosition.Z -= 5;
+                                //}
+                                //if (camera.cameraPosition.Z == bb.MinZ)
+                                //{
+                                //    camera.cameraPosition.Z += 5;
+                                //}
                             }
                         }
                         if (bb.Type == 3)

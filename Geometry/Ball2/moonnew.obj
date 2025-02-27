@@ -1,6 +1,6 @@
 # Blender 4.3.2
 # www.blender.org
-mtllib moonnew.mtl
+mtllib ball.mtl
 o moon
 v 0.427640 0.168152 -0.742221
 v 0.275301 0.245692 -0.791130

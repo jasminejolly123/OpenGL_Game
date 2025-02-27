@@ -24,6 +24,7 @@ namespace OpenGL_Game.Scenes
         EntityManager entityManager;
         SystemManager systemManager;
         CameraManager cameraManager;
+        MazeEscapeCollisionManager collisionManager;
         public Camera camera;
         //public Camera camera;
         public static GameScene gameInstance;
@@ -67,7 +68,7 @@ namespace OpenGL_Game.Scenes
         public void CreateCamera()
         {
 
-            newCamera = new Camera(new OpenTK.Mathematics.Vector3(-5, 2, 7), new OpenTK.Mathematics.Vector3(0, 0, 0), (float)(sceneManager.Size.X) / (float)(sceneManager.Size.Y), 0.1f, 100f);
+            newCamera = new Camera(new OpenTK.Mathematics.Vector3(-5, 1.5f, 7), new OpenTK.Mathematics.Vector3(0, 1.5f, 0), (float)(sceneManager.Size.X) / (float)(sceneManager.Size.Y), 0.1f, 100f);
             cameraManager.AddCamera(newCamera);
         }
 
@@ -78,7 +79,7 @@ namespace OpenGL_Game.Scenes
             newEntity = new Entity("Ball1");
             newEntity.AddComponent(new ComponentPosition(-5, 0, 1));
             newEntity.AddComponent(new ComponentScale(0.5f, 0.5f, 0.5f));
-            newEntity.AddComponent(new ComponentGeometry("Geometry/Moon/moon.obj"));
+            newEntity.AddComponent(new ComponentGeometry("Geometry/Ball/ball.obj"));
             entityManager.AddEntity(newEntity);
 
             newEntity = new Entity("Maze");
@@ -103,10 +104,6 @@ namespace OpenGL_Game.Scenes
             newEntity.AddComponent(new ComponentCollisionWall(-52, 10000000, 100000000, -100000000, 1));
             entityManager.AddEntity(newEntity);
 
-            newEntity = new Entity("BB5");
-            newEntity.AddComponent(new ComponentCollisionWall(-27, -15.5f, 10.5f, 22, 2));
-            entityManager.AddEntity(newEntity);
-
             newEntity = new Entity("BB13");
             newEntity.AddComponent(new ComponentCollisionWall(-42, -15.5f, 6.5f, -10000000, 3));
             entityManager.AddEntity(newEntity);
@@ -122,6 +119,15 @@ namespace OpenGL_Game.Scenes
             newEntity = new Entity("BB16");
             newEntity.AddComponent(new ComponentCollisionWall(-1000000, -50, 15.5f, 41.5f, 4));
             entityManager.AddEntity(newEntity);
+
+
+
+
+            newEntity = new Entity("BB5");
+            newEntity.AddComponent(new ComponentCollisionWall(-27, -15.5f, 10.5f, 22, 2));
+            entityManager.AddEntity(newEntity);
+
+
 
             //newEntity = new Entity("Moon");
             //newEntity.AddComponent(new ComponentPosition(0, 0, 0));
@@ -216,8 +222,12 @@ namespace OpenGL_Game.Scenes
             GL.Viewport(0, 0, sceneManager.Size.X, sceneManager.Size.Y);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
+
+
             // Action ALL systems
             systemManager.ActionSystems(entityManager, cameraManager);
+
+            collisionManager.ProcessCollisions();
 
             // Render score
             GUI.DrawText("Score: 000", 30, 80, 30, 255, 255, 255);

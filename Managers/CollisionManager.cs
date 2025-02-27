@@ -17,12 +17,23 @@ namespace OpenGL_Game.Managers
         public Entity entity;
         public COLLISIONTYPE collisionType;
     }
-
-    abstract class CollisionManager
+    
+    public abstract class CollisionManager
     {
-        protected List<Collision> collisions = new List<Collision>();
-        public CollisionManager()
+        List<Collision> collisionManifold = new List<Collision>();
+        public CollisionManager() { }
+        public void ClearManifold() { collisionManifold.Clear(); }
+        private void CollisionBetweenCamera(Entity entity, COLLISIONTYPE collisionType)
         {
+            // If we already have this collision in the manifold then do not add it
+            foreach (Collision coll in collisionManifold)
+            {
+                if (coll.entity == entity) return;
+            }
+            Collision collision;
+            collision.entity = entity;
+            collision.collisionType = collisionType;
+            collisionManifold.Add(collision);
         }
 
         public abstract void ProcessCollisions();

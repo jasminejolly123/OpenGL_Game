@@ -5,7 +5,7 @@ namespace OpenGL_Game
     class Camera
     {
         public Matrix4 view, projection;
-        public Vector3 cameraPosition, cameraDirection, cameraUp;
+        public Vector3 oldCameraPosition, cameraPosition, cameraDirection, cameraUp;
         private Vector3 targetPosition;
         public float cameraradius;
 
@@ -29,14 +29,21 @@ namespace OpenGL_Game
             projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45), ratio, near, far);
         }
 
+        public void PutBack()
+        {
+            cameraPosition = oldCameraPosition;
+        }
+
         public void MoveForward(float move)
         {
+            oldCameraPosition = cameraPosition;
             cameraPosition += move*cameraDirection;
             UpdateView();
         }
 
         public void Translate(Vector3 move)
         {
+            oldCameraPosition = cameraPosition;
             cameraPosition += move;
             UpdateView();
         }
