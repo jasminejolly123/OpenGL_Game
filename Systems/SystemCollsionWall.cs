@@ -18,6 +18,7 @@ namespace OpenGL_Game.Systems
         //public bool[] keysPressed = new bool[500];
         public SystemCollisionWall()
         {
+
         }
 
         public string Name
