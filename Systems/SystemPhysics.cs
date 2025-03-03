@@ -52,11 +52,11 @@ namespace OpenGL_Game.Systems
 
             if (name == "Ball1")
             {
-                bool flag = true;
-                while (flag)
+                velocity.Velocity = (0, 0, 1);
+
+                if (position.position.Z >= 53)
                 {
-                    position.position = (-1.5f, 0, 43);
-                    velocity.Velocity = (0, 0, 1);
+                    velocity.Velocity = (- 1, 0, 0);
                 }
             }
         }
