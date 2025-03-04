@@ -76,9 +76,9 @@ namespace OpenGL_Game.Systems
                             if (camera.cameraPosition.X <= bb.MaxX && camera.cameraPosition.X >= bb.MinX && camera.cameraPosition.Z <= bb.MaxZ && camera.cameraPosition.Z >= bb.MinZ)
                             {
 
-                                //camera.PutBack();
+                                camera.PutBack();
 
-                                collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
+                                //collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
                                 //if (camera.cameraPosition.X < bb.MaxX)
                                 //{
                                 //    camera.cameraPosition.X += 5;

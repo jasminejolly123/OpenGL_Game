@@ -68,6 +68,11 @@ namespace OpenGL_Game.Systems
                 }
 
             }
+
+            if (name == "Ball2")
+            {
+                velocity.Velocity = (1, 0, 0);
+            }
         }
     }
 }
