@@ -49,30 +49,6 @@ namespace OpenGL_Game.Systems
         public void Motion(ComponentPosition position, ComponentVelocity velocity, string name)
         {
             position.position = position.position + velocity.Velocity * GameScene.dt;
-
-            if (name == "Ball1")
-            {
-                velocity.Velocity = (0, 0, 1);
-
-                if (position.position.Z >= 53)
-                {
-                    velocity.Velocity = (-1, 0, 0);
-                }
-                if (position.position.X <= -13)
-                {
-                    velocity.Velocity = (0, 0, -1);
-                }
-                if (position.position.Z <= 43 && position.Position.X < -1.5f)
-                {
-                    velocity.Velocity = (1, 0, 0);
-                }
-
-            }
-
-            if (name == "Ball2")
-            {
-                velocity.Velocity = (1, 0, 0);
-            }
         }
     }
 }

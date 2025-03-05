@@ -29,7 +29,7 @@ namespace OpenGL_Game.Systems
             {
                 if ((entity.Mask & MASK) == MASK)
                 {
-                    List<IComponent> components = entities[0].Components;
+                    List<IComponent> components = entity.Components;
 
                     IComponent positionComponent = components.Find(delegate (IComponent component)
                     {
@@ -49,12 +49,39 @@ namespace OpenGL_Game.Systems
         {
             if (name == "Ball1")
             {
-                bool flag = true;
-                while (flag)
+                velocity.Velocity = (0, 0, 1);
+
+                if (position.position.Z >= 53)
                 {
-                    position.position = (-1.5f, 0, 43);
+                    velocity.Velocity = (-1, 0, 0);
+                }
+                if (position.position.X <= -13)
+                {
+                    velocity.Velocity = (0, 0, -1);
+                }
+                if (position.position.Z <= 43 && position.Position.X < -1.5f)
+                {
+                    velocity.Velocity = (1, 0, 0);
+                }
+
+            }
+
+            if (name == "Ball2")
+            {
+                velocity.Velocity = (-1, 0, 0);
+
+                if (position.position.X >= -53)
+                {
                     velocity.Velocity = (0, 0, 1);
                 }
+                //if (position.position.Z <= 13)
+                //{
+                //    velocity.Velocity = (0, 0, -1);
+                //}
+                //if (position.position.X <= -43 && position.Position.Z < 1.5f)
+                //{
+                //    velocity.Velocity = (1, 0, 0);
+                //}
             }
         }
     }

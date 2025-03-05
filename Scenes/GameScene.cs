@@ -192,6 +192,9 @@ namespace OpenGL_Game.Scenes
             newSystem = new SystemCollisionWall(collisionManager);
             systemManager.AddSystem(newSystem);
 
+            newSystem = new SystemBallPath();
+            systemManager.AddSystem(newSystem);
+
         }
 
         /// <summary>
