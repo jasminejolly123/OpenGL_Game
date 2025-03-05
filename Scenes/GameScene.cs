@@ -24,7 +24,7 @@ namespace OpenGL_Game.Scenes
         EntityManager entityManager;
         SystemManager systemManager;
         CameraManager cameraManager;
-        MazeEscapeCollisionManager collisionManager;
+        CollisionManager collisionManager;
         public Camera camera;
         //public Camera camera;
         public static GameScene gameInstance;
@@ -38,6 +38,7 @@ namespace OpenGL_Game.Scenes
             entityManager = new EntityManager();
             systemManager = new SystemManager();
             cameraManager = new CameraManager();
+            collisionManager = new MazeEscapeCollisionManager();
 
             // Set the title of the window
             sceneManager.Title = "Game";
@@ -188,7 +189,7 @@ namespace OpenGL_Game.Scenes
             newSystem = new SystemCollisionSphere();
             systemManager.AddSystem(newSystem);
 
-            newSystem = new SystemCollisionWall();
+            newSystem = new SystemCollisionWall(collisionManager);
             systemManager.AddSystem(newSystem);
 
         }
@@ -261,10 +262,10 @@ namespace OpenGL_Game.Scenes
             // Action ALL systems
             systemManager.ActionSystems(entityManager, cameraManager);
 
-            if (collisionManager != null)
-            {
+           // if (collisionManager != null)
+            //{
                 collisionManager.ProcessCollisions(cameraManager);
-            }
+            //}
             //collisionManager.ProcessCollisions(cameraManager);
 
             // Render score

@@ -30,7 +30,7 @@ namespace OpenGL_Game.Systems
             {
                 if ((entity.Mask & MASK) == MASK)
                 {
-                    List<IComponent> components = entities[0].Components;
+                    List<IComponent> components = entity.Components;
 
                     IComponent positionComponent = components.Find(delegate (IComponent component)
                     {

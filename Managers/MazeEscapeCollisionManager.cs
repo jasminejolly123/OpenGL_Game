@@ -10,22 +10,31 @@ namespace OpenGL_Game.Managers
     {
         public override void ProcessCollisions(CameraManager cameraManager)
         {
-            //Collision collision;
-            //if (collision.collisionType == COLLISIONTYPE.LINE_SPHERE)
-            //{
-
-            //}
-            //else
-            //{
-            //    foreach (Camera camera in cameraManager.cameraList)
-            //    {
-            //        camera.PutBack();
-            //    }
-            //}
-            foreach (Camera camera in cameraManager.cameraList)
+            foreach(Collision collision in collisionManifold)
             {
-                camera.PutBack();
+                if (collision.collisionType == COLLISIONTYPE.LINE_SPHERE)
+                {
+                    foreach (Camera camera in cameraManager.cameraList)
+                    {
+                        camera.PutBack();
+                    }
+                }
+                //else
+                //{
+                //    foreach (Camera camera in cameraManager.cameraList)
+                //    {
+                //        camera.PutBack();
+                //    }
+                //}
             }
+
+            
+            //foreach (Camera camera in cameraManager.cameraList)
+            //{
+            //    camera.PutBack();
+            //}
+
+            ClearManifold();
         }
     }
 }

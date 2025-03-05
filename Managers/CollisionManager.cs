@@ -22,7 +22,7 @@ namespace OpenGL_Game.Managers
     public abstract class CollisionManager
     {
         public Camera camera;
-        List<Collision> collisionManifold = new List<Collision>();
+        protected List<Collision> collisionManifold = new List<Collision>();
         public CollisionManager() { }
         public void ClearManifold() { collisionManifold.Clear(); }
         public void CollisionBetweenCamera(Entity entity, COLLISIONTYPE collisionType)
