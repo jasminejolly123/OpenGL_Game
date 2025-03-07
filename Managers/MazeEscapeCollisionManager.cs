@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
+using OpenGL_Game.Components;
+using OpenGL_Game.Objects;
 
 namespace OpenGL_Game.Managers
 {
@@ -19,20 +22,36 @@ namespace OpenGL_Game.Managers
                         camera.PutBack();
                     }
                 }
-                //else
-                //{
-                //    foreach (Camera camera in cameraManager.cameraList)
-                //    {
-                //        camera.PutBack();
-                //    }
-                //}
-            }
+                if (collision.collisionType == COLLISIONTYPE.LINE_SPHERE_SPECIAL1)
+                {
+                    foreach (Camera camera in cameraManager.cameraList)
+                    {
+                        camera.cameraPosition.Z = camera.cameraPosition.Z + 1;
+                    }
+                }
+                if (collision.collisionType == COLLISIONTYPE.LINE_SPHERE_SPECIAL2)
+                {
+                    foreach (Camera camera in cameraManager.cameraList)
+                    {
+                        camera.cameraPosition.Z = camera.cameraPosition.Z - 1;
+                    }
+                }
+                if (collision.collisionType == COLLISIONTYPE.LINE_SPHERE_SPECIAL3)
+                {
+                   foreach(Camera camera in cameraManager.cameraList)
+                    {
+                        camera.cameraPosition.X = camera.cameraPosition.X + 1;
+                    }
+                }
+                if (collision.collisionType == COLLISIONTYPE.LINE_SPHERE_SPECIAL4)
+                {
+                    foreach (Camera camera in cameraManager.cameraList)
+                    {
+                        camera.cameraPosition.X = camera.cameraPosition.X - 1;
+                    }
+                }
 
-            
-            //foreach (Camera camera in cameraManager.cameraList)
-            //{
-            //    camera.PutBack();
-            //}
+            }
 
             ClearManifold();
         }

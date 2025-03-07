@@ -68,20 +68,21 @@ namespace OpenGL_Game.Systems
 
             if (name == "Ball2")
             {
-                velocity.Velocity = (-1, 0, 0);
+                velocity.Velocity = (1, 0, 0);
+                position.position.Y = (float)Math.Sin(GameScene.dt) * 100;
 
-                if (position.position.X >= -53)
+                if (position.position.X >= -43)
                 {
                     velocity.Velocity = (0, 0, 1);
                 }
-                //if (position.position.Z <= 13)
-                //{
-                //    velocity.Velocity = (0, 0, -1);
-                //}
-                //if (position.position.X <= -43 && position.Position.Z < 1.5f)
-                //{
-                //    velocity.Velocity = (1, 0, 0);
-                //}
+                if (position.position.Z >= 13)
+                {
+                    velocity.Velocity = (-1, 0, 0);
+                }
+                if (position.position.X <= -53 && position.Position.Z > 1.5f)
+                {
+                    velocity.Velocity = (0, 0, -1);
+                }
             }
         }
     }

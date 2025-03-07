@@ -53,53 +53,28 @@ namespace OpenGL_Game.Systems
 
                         if (bb.Type == 1)
                         {
-                            //collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
                             if (camera.cameraPosition.X >= bb.MaxX)
                             {
-                                //camera.cameraPosition.X = camera.cameraPosition.X - 1;
                                 collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
                             }
                             if (camera.cameraPosition.X <= bb.MinX)
                             {
-                                //camera.cameraPosition.X = camera.cameraPosition.X + 1;
                                 collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
                             }
                             if (camera.cameraPosition.Z >= bb.MinZ)
                             {
-                                //camera.cameraPosition.Z = camera.cameraPosition.Z - 1;
                                 collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
                             }
                             if (camera.cameraPosition.Z <= bb.MaxZ)
                             {
-                                //camera.cameraPosition.Z = camera.cameraPosition.Z + 1;
                                 collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
                             }
-                            ////collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
                         }
                         if (bb.Type == 2)
                         {
                             if (camera.cameraPosition.X <= bb.MaxX && camera.cameraPosition.X >= bb.MinX && camera.cameraPosition.Z <= bb.MaxZ && camera.cameraPosition.Z >= bb.MinZ)
                             {
-
-                                //camera.PutBack();
-
                                 collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
-                                //if (camera.cameraPosition.X < bb.MaxX)
-                                //{
-                                //    camera.cameraPosition.X += 5;
-                                //}
-                                //if (camera.cameraPosition.X == bb.MinX)
-                                //{
-                                //    camera.cameraPosition.X += 5;
-                                //}
-                                //if (camera.cameraPosition.Z == bb.MaxZ)
-                                //{
-                                //    camera.cameraPosition.Z -= 5;
-                                //}
-                                //if (camera.cameraPosition.Z == bb.MinZ)
-                                //{
-                                //    camera.cameraPosition.Z += 5;
-                                //}
                             }
                         }
                         if (bb.Type == 3)
@@ -110,12 +85,12 @@ namespace OpenGL_Game.Systems
                                 if (camera.cameraPosition.Z <= bb.MinZ)
                                 {
                                     //camera.cameraPosition.Z = camera.cameraPosition.Z + 1;
-                                    collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
+                                    collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE_SPECIAL1);
                                 }
                                 if (camera.cameraPosition.Z >= bb.MaxZ)
                                 {
                                     //camera.cameraPosition.Z = camera.cameraPosition.Z - 1;
-                                    collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
+                                    collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE_SPECIAL2);
                                 }
                             }
                         }
@@ -123,15 +98,16 @@ namespace OpenGL_Game.Systems
                         {
                             if (camera.cameraPosition.Z <= bb.MaxZ && camera.cameraPosition.Z > bb.MinZ)
                             {
+                                //collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE_SPECIAL);
                                 if (camera.cameraPosition.X <= bb.MinX)
                                 {
                                     //camera.cameraPosition.X = camera.cameraPosition.X + 1;
-                                    collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
+                                    collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE_SPECIAL3);
                                 }
                                 if (camera.cameraPosition.X >= bb.MaxX)
                                 {
                                     //camera.cameraPosition.X = camera.cameraPosition.X - 1;
-                                    collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE);
+                                    collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.LINE_SPHERE_SPECIAL4);
                                 }
                             }
                         }

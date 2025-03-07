@@ -9,7 +9,11 @@ namespace OpenGL_Game.Managers
     public enum COLLISIONTYPE
     {
         SPHERE_SPHERE,
-        LINE_SPHERE
+        LINE_SPHERE,
+        LINE_SPHERE_SPECIAL1,
+        LINE_SPHERE_SPECIAL2,
+        LINE_SPHERE_SPECIAL3,
+        LINE_SPHERE_SPECIAL4,
     }
 
     public struct Collision
