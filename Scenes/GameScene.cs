@@ -12,6 +12,7 @@ using ObjLoader.Loader.Data.VertexData;
 using static OpenGL_Game.Managers.SceneManager;
 using System.Numerics;
 using System.Windows.Forms;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace OpenGL_Game.Scenes
 {
@@ -31,6 +32,7 @@ namespace OpenGL_Game.Scenes
         public bool[] keysPressed = new bool[500];
         FrameEventArgs e;
         KeyboardKeyEventArgs f;
+        private float elapsedTime = 0f;
 
         public GameScene(SceneManager sceneManager) : base(sceneManager)
         {
@@ -260,8 +262,6 @@ namespace OpenGL_Game.Scenes
             GL.Viewport(0, 0, sceneManager.Size.X, sceneManager.Size.Y);
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-
-
             // Action ALL systems
             systemManager.ActionSystems(entityManager, cameraManager);
 
@@ -272,7 +272,17 @@ namespace OpenGL_Game.Scenes
             //collisionManager.ProcessCollisions(cameraManager);
 
             // Render score
-            GUI.DrawText("Score: 000", 30, 80, 30, 255, 255, 255);
+            elapsedTime += (float)e.Time;
+
+            // Display elapsed time
+            string timeText = "Score: " + elapsedTime.ToString("F2");
+            GUI.DrawText(timeText, 30, 80, 30, 255, 255, 255);
+
+
+            //score += (float)e.Time;
+            //score = score / 10;
+            //string scoreText = "Score: " + score.ToString("F2") + " seconds";
+            //GUI.DrawText(scoreText, 30, 80, 30, 255, 255, 255);
             GUI.Render();
         }
 
