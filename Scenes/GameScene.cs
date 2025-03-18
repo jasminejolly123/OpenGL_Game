@@ -81,6 +81,11 @@ namespace OpenGL_Game.Scenes
         {
             Entity newEntity;
 
+            newEntity = new Entity("key");
+            newEntity.AddComponent(new ComponentPosition(-5, 0, 45));
+            newEntity.AddComponent(new ComponentGeometry("Geometry/Key/key.obj"));
+            entityManager.AddEntity(newEntity);
+
             newEntity = new Entity("Ball1");
             newEntity.AddComponent(new ComponentPosition(-1.5f, 0, 43));
             newEntity.AddComponent(new ComponentScale(0.5f, 0.5f, 0.5f));

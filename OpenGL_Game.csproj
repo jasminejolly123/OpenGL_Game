@@ -73,6 +73,9 @@
     <None Update="Geometry\Intergalactic_Spaceship\Intergalactic_Spaceship_rough.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Geometry\Key\moon_diffuse.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Geometry\Maze\brick.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
