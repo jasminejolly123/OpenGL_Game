@@ -13,6 +13,7 @@ using static OpenGL_Game.Managers.SceneManager;
 using System.Numerics;
 using System.Windows.Forms;
 using static System.Formats.Asn1.AsnWriter;
+using System.Windows.Forms.Automation;
 
 namespace OpenGL_Game.Scenes
 {
@@ -33,6 +34,7 @@ namespace OpenGL_Game.Scenes
         FrameEventArgs e;
         KeyboardKeyEventArgs f;
         private float elapsedTime = 0f;
+        public static int lives = 3;
 
         public GameScene(SceneManager sceneManager) : base(sceneManager)
         {
@@ -83,6 +85,7 @@ namespace OpenGL_Game.Scenes
             newEntity.AddComponent(new ComponentPosition(-1.5f, 0, 43));
             newEntity.AddComponent(new ComponentScale(0.5f, 0.5f, 0.5f));
             newEntity.AddComponent(new ComponentVelocity(0, 0, 0));
+            newEntity.AddComponent(new ComponentCollisionSphere(0.5f));
             newEntity.AddComponent(new ComponentGeometry("Geometry/Ball/ball.obj"));
             entityManager.AddEntity(newEntity);
 
@@ -90,6 +93,7 @@ namespace OpenGL_Game.Scenes
             newEntity.AddComponent(new ComponentPosition(-63, 0, 1.5f));
             newEntity.AddComponent(new ComponentScale(0.5f, 0.5f, 0.5f));
             newEntity.AddComponent(new ComponentVelocity(0, 0, 0));
+            newEntity.AddComponent(new ComponentCollisionSphere(0.5f));
             newEntity.AddComponent(new ComponentGeometry("Geometry/Ball/ball.obj"));
             entityManager.AddEntity(newEntity);
 
@@ -188,7 +192,7 @@ namespace OpenGL_Game.Scenes
             newSystem = new SystemPhysics();
             systemManager.AddSystem(newSystem);
 
-            newSystem = new SystemCollisionSphere();
+            newSystem = new SystemCollisionSphere(collisionManager);
             systemManager.AddSystem(newSystem);
 
             newSystem = new SystemCollisionWall(collisionManager);
@@ -209,29 +213,6 @@ namespace OpenGL_Game.Scenes
             dt = (float)e.Time;
             System.Console.WriteLine("fps=" + (int)(1.0 / dt));
 
-            //TODO: Add your update logic here
-
-            //switch (f.Key)
-            //{
-            //    case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Up:
-            //        camera.MoveForward(0.1f);
-            //        break;
-            //    case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Down:
-            //        camera.MoveForward(-0.1f);
-            //        break;
-            //    case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Left:
-            //        camera.RotateY(-0.01f);
-            //        break;
-            //    case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.Right:
-            //        camera.RotateY(0.01f);
-            //        break;
-            //    case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.M:
-            //        sceneManager.StartMenu();
-            //        break;
-            //    default:
-            //        break;
-            //}
-
             if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Up])
             {
                 newCamera.MoveForward(5f * dt);
@@ -250,8 +231,6 @@ namespace OpenGL_Game.Scenes
             }
 
         }
-
-
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -277,6 +256,11 @@ namespace OpenGL_Game.Scenes
             // Display elapsed time
             string timeText = "Score: " + elapsedTime.ToString("F2");
             GUI.DrawText(timeText, 30, 80, 30, 255, 255, 255);
+
+            string livesText = "Lives: " + lives.ToString();
+            GUI.DrawText(livesText, 1010, 80, 30, 255, 255, 255);
+
+            NoLives(lives);
 
 
             //score += (float)e.Time;
@@ -324,6 +308,15 @@ namespace OpenGL_Game.Scenes
                 case (OpenTK.Windowing.GraphicsLibraryFramework.Keys)System.Windows.Forms.Keys.M:
                     sceneManager.UpdateNone();
                     break;
+            }
+        }
+
+        public void NoLives(int lives)
+        {
+            if (lives == 0)
+            {
+                sceneManager.GameOver();
+                sceneManager.UpdateNone();
             }
         }
     }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using OpenGL_Game.Components;
 using OpenGL_Game.Objects;
+using OpenGL_Game.Scenes;
 
 namespace OpenGL_Game.Managers
 {
@@ -48,6 +49,14 @@ namespace OpenGL_Game.Managers
                     foreach (Camera camera in cameraManager.cameraList)
                     {
                         camera.cameraPosition.X = camera.cameraPosition.X - 1;
+                    }
+                }
+                if (collision.collisionType == COLLISIONTYPE.SPHERE_SPHERE)
+                {
+                    foreach (Camera camera in cameraManager.cameraList)
+                    {
+                        camera.PutBack();
+                        GameScene.lives = GameScene.lives - 1;
                     }
                 }
 
