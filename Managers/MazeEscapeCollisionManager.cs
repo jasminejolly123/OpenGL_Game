@@ -55,8 +55,15 @@ namespace OpenGL_Game.Managers
                 {
                     foreach (Camera camera in cameraManager.cameraList)
                     {
-                        camera.PutBack();
+                        camera.cameraPosition = (-5, 1.5f, 7);
                         GameScene.lives = GameScene.lives - 1;
+                    }
+                }
+                if (collision.collisionType == COLLISIONTYPE.SPHERE_KEY)
+                {
+                    foreach (Camera camera in cameraManager.cameraList)
+                    {
+                        GameScene.keys = GameScene.keys + 1;
                     }
                 }
 

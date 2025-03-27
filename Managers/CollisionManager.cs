@@ -14,6 +14,7 @@ namespace OpenGL_Game.Managers
         LINE_SPHERE_SPECIAL2,
         LINE_SPHERE_SPECIAL3,
         LINE_SPHERE_SPECIAL4,
+        SPHERE_KEY,
     }
 
     public struct Collision

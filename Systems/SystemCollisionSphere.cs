@@ -62,7 +62,15 @@ namespace OpenGL_Game.Systems
 
                         if (distance < radius)
                         {
-                            collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.SPHERE_SPHERE);
+                            if (entity.Name == "Key")
+                            {
+                                collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.SPHERE_KEY);
+                                position.position = (1000000000, 1000000000, 10000000);
+                            }
+                            else
+                            {
+                                collisionManager.CollisionBetweenCamera(entity, COLLISIONTYPE.SPHERE_SPHERE);
+                            }
                         }
                     }
                 }

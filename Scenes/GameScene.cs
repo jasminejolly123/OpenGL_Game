@@ -35,6 +35,7 @@ namespace OpenGL_Game.Scenes
         KeyboardKeyEventArgs f;
         private float elapsedTime = 0f;
         public static int lives = 3;
+        public static int keys = 0;
 
         public GameScene(SceneManager sceneManager) : base(sceneManager)
         {
@@ -82,8 +83,23 @@ namespace OpenGL_Game.Scenes
             Entity newEntity;
 
             newEntity = new Entity("Key");
-            newEntity.AddComponent(new ComponentPosition(-1.5f, 0, 43));
+            newEntity.AddComponent(new ComponentPosition(-8, 0, 46));
             newEntity.AddComponent(new ComponentScale(1, 1, 1));
+            newEntity.AddComponent(new ComponentCollisionSphere(0.5f));
+            newEntity.AddComponent(new ComponentGeometry("Geometry/Key/key.obj"));
+            entityManager.AddEntity(newEntity);
+
+            newEntity = new Entity("Key");
+            newEntity.AddComponent(new ComponentPosition(-47, 0, 46));
+            newEntity.AddComponent(new ComponentScale(1, 1, 1));
+            newEntity.AddComponent(new ComponentCollisionSphere(0.5f));
+            newEntity.AddComponent(new ComponentGeometry("Geometry/Key/key.obj"));
+            entityManager.AddEntity(newEntity);
+
+            newEntity = new Entity("Key");
+            newEntity.AddComponent(new ComponentPosition(-47, 0, 8));
+            newEntity.AddComponent(new ComponentScale(1, 1, 1));
+            newEntity.AddComponent(new ComponentCollisionSphere(0.5f));
             newEntity.AddComponent(new ComponentGeometry("Geometry/Key/key.obj"));
             entityManager.AddEntity(newEntity);
 
@@ -267,6 +283,9 @@ namespace OpenGL_Game.Scenes
             GUI.DrawText(livesText, 1010, 80, 30, 255, 255, 255);
 
             NoLives(lives);
+
+            string keysText = "Keys: " + keys.ToString();
+            GUI.DrawText(keysText, 30, 120, 30, 255, 255, 255);
 
 
             //score += (float)e.Time;
