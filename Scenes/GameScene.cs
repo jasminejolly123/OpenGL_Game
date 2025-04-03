@@ -82,6 +82,13 @@ namespace OpenGL_Game.Scenes
         {
             Entity newEntity;
 
+            newEntity = new Entity("Drone");
+            newEntity.AddComponent(new ComponentPosition(-8, 0, 46));
+            newEntity.AddComponent(new ComponentScale(1, 1, 1));
+            newEntity.AddComponent(new ComponentCollisionSphere(0.5f));
+            newEntity.AddComponent(new ComponentGeometry("Geometry/Drone/Drone2.obj"));
+            entityManager.AddEntity(newEntity);
+
             newEntity = new Entity("Key");
             newEntity.AddComponent(new ComponentPosition(-8, 0, 46));
             newEntity.AddComponent(new ComponentScale(1, 1, 1));

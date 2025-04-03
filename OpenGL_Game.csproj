@@ -49,6 +49,21 @@
     <ApplicationIcon />
   </PropertyGroup>
   <ItemGroup>
+    <None Update="Geometry\Drone\drone.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Geometry\Drone\Drone2.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Geometry\Drone\Drone2.obj.mtl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Geometry\Drone\drone_normal.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Geometry\Drone\rotor2.tga">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Geometry\Key\moon_diffuse.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
