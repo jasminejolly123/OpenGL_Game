@@ -52,13 +52,13 @@
     <None Update="Geometry\Drone\drone.tga">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Geometry\Drone\Drone2.obj">
+    <None Update="Geometry\Drone\droneobject.mtl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Geometry\Drone\Drone2.obj.mtl">
+    <None Update="Geometry\Drone\droneobject.obj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Geometry\Drone\drone_normal.tga">
+    <None Update="Geometry\Drone\moon_diffuse.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Geometry\Drone\rotor2.tga">

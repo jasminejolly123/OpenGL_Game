@@ -3,7 +3,7 @@ using OpenGL_Game.OBJLoader;
 
 namespace OpenGL_Game.Components
 {
-    class ComponentGeometry : IComponent
+    public class ComponentGeometry : IComponent
     {
         Geometry geometry;
 

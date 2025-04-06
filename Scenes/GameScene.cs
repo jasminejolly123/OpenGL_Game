@@ -26,9 +26,10 @@ namespace OpenGL_Game.Scenes
         EntityManager entityManager;
         SystemManager systemManager;
         CameraManager cameraManager;
+        DroneManager droneManager;
         CollisionManager collisionManager;
         public Camera camera;
-        //public Camera camera;
+        public Drone drone;
         public static GameScene gameInstance;
         public bool[] keysPressed = new bool[500];
         FrameEventArgs e;
@@ -43,6 +44,7 @@ namespace OpenGL_Game.Scenes
             entityManager = new EntityManager();
             systemManager = new SystemManager();
             cameraManager = new CameraManager();
+            droneManager = new DroneManager();
             collisionManager = new MazeEscapeCollisionManager();
 
             // Set the title of the window
@@ -63,6 +65,7 @@ namespace OpenGL_Game.Scenes
             GL.ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
             CreateCamera();
+            //CreateDrone();
             CreateEntities();
             CreateSystems();
 
@@ -78,15 +81,24 @@ namespace OpenGL_Game.Scenes
             cameraManager.AddCamera(newCamera);
         }
 
+        Drone newDrone;
+
+        //public void CreateDrone()
+        //{
+        //    newDrone = new Drone(new OpenTK.Mathematics.Vector3(0, 3.5f, 0), new OpenTK.Mathematics.Vector3(0, 1.5f, 0), (new ComponentGeometry("Geometry/Drone/droneobject.obj")));
+        //    droneManager.AddDrone(newDrone);
+        //}
+
         public void CreateEntities()
         {
             Entity newEntity;
 
             newEntity = new Entity("Drone");
-            newEntity.AddComponent(new ComponentPosition(-8, 0, 46));
+            newEntity.AddComponent(new ComponentPosition(0, 3.5f, 0));
             newEntity.AddComponent(new ComponentScale(1, 1, 1));
             newEntity.AddComponent(new ComponentCollisionSphere(0.5f));
-            newEntity.AddComponent(new ComponentGeometry("Geometry/Drone/Drone2.obj"));
+            newEntity.AddComponent(new ComponentVelocity(0, 0, 0));
+            newEntity.AddComponent(new ComponentGeometry("Geometry/Drone/droneobject.obj"));
             entityManager.AddEntity(newEntity);
 
             newEntity = new Entity("Key");
@@ -164,9 +176,6 @@ namespace OpenGL_Game.Scenes
             newEntity.AddComponent(new ComponentCollisionWall(-1000000, -50, 15.5f, 41.5f, 4));
             entityManager.AddEntity(newEntity);
 
-
-
-
             newEntity = new Entity("BB5");
             newEntity.AddComponent(new ComponentCollisionWall(-27, -15.5f, 10.5f, 22, 2));
             entityManager.AddEntity(newEntity);
@@ -228,6 +237,9 @@ namespace OpenGL_Game.Scenes
             systemManager.AddSystem(newSystem);
 
             newSystem = new SystemBallPath();
+            systemManager.AddSystem(newSystem);
+
+            newSystem = new SystemDrone();
             systemManager.AddSystem(newSystem);
 
         }

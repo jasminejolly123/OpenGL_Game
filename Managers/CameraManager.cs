@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using OpenGL_Game.Objects;
-//using System.Diagnostics;
 
 namespace OpenGL_Game.Managers
 {
@@ -15,8 +14,6 @@ namespace OpenGL_Game.Managers
 
         public void AddCamera(Camera camera)
         {
-            //Entity result = FindEntity(entity.Name);
-            //Debug.Assert(result == null, "Entity '" + entity.Name + "' already exists");
             cameraList.Add(camera);
         }
 
