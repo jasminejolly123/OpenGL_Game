@@ -1,12 +1,17 @@
-﻿using OpenGL_Game.Managers;
-using OpenTK.Windowing.Common;
-using SkiaSharp;
+﻿//using OpenGL_Game.Managers;
+//using OpenTK.Windowing.Common;
+//using SkiaSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using OpenTK.Graphics.OpenGL;
 using OpenTK.Graphics.OpenGL;
+using OpenGL_Game.Managers;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.GraphicsLibraryFramework;
+using SkiaSharp;
 
 namespace OpenGL_Game.Scenes
 {
@@ -50,6 +55,8 @@ namespace OpenGL_Game.Scenes
             paint.Color = SKColors.Black;
             paint.Style = SKPaintStyle.Stroke;
             GUI.DrawText("Game Over", sceneManager.Size.X * 0.5f, 150, paint);
+            Score newwScore = new Score();
+            GUI.DrawText( newwScore.Value, sceneManager.Size.X * 0.5f, 50, paint);
             GUI.Render();
         }
 

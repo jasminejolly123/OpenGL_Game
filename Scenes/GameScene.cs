@@ -273,6 +273,8 @@ namespace OpenGL_Game.Scenes
 
         }
 
+        public Score newScore = new Score();
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -297,6 +299,8 @@ namespace OpenGL_Game.Scenes
             // Display elapsed time
             string timeText = "Score: " + elapsedTime.ToString("F2");
             GUI.DrawText(timeText, 30, 80, 30, 255, 255, 255);
+
+            newScore.Value = elapsedTime.ToString("F2");
 
             string livesText = "Lives: " + lives.ToString();
             GUI.DrawText(livesText, 1010, 80, 30, 255, 255, 255);
