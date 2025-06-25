@@ -40,13 +40,13 @@ namespace OpenGL_Game.Systems
             get { return "SystemDrone"; }
         }
 
-        public void OnAction(List<Entity> entities, List<Camera> cameras)
+        public void OnAction(List<Entity> entites, List<Camera> cameras, List<Drone> drones)
         {
-            foreach (Entity entity in entities)
+            foreach (Drone drone in drones)
             {
-                if ((entity.Mask & MASK) == MASK)
+                if ((drone.Mask & MASK) == MASK)
                 {
-                    List<IComponent> components = entity.Components;
+                    List<IComponent> components = drone.Components;
 
                     IComponent positionComponent = components.Find(delegate (IComponent component)
                     {
@@ -57,37 +57,35 @@ namespace OpenGL_Game.Systems
                         return component.ComponentType == ComponentTypes.COMPONENT_VELOCITY;
                     });
 
-                    Motion((ComponentPosition)positionComponent, (ComponentVelocity)velocityComponent);
-                    if (entity.Name == "Drone")
-                    {
-                        Motion((ComponentPosition)positionComponent, (ComponentVelocity)velocityComponent);
-                    }
+                    Motion((ComponentPosition)positionComponent, (ComponentVelocity)velocityComponent, drone);
                 }
             }
         }
 
-        public void Motion(ComponentPosition position, ComponentVelocity velocity)
+        public void Motion(ComponentPosition position, ComponentVelocity velocity, Drone drone)
         {
 
-            GameScene.dt = (float)e.Time;
-            System.Console.WriteLine("fps=" + (int)(1.0 / GameScene.dt));
 
-            if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Up])
-            {
-                velocity.Velocity = (-3, 0, 0);
-            }
-            if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Down])
-            {
-                velocity.Velocity = (0, 0, 3);
-            }
-            if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Right])
-            {
-                droneDirection = Matrix3.CreateRotationY(2) * droneDirection;
-            }
-            if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Left])
-            {
-                droneDirection = Matrix3.CreateRotationY(-2) * droneDirection;
-            }
+                GameScene.dt = (float)e.Time;
+                System.Console.WriteLine("fps=" + (int)(1.0 / GameScene.dt));
+
+                if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Up])
+                {
+                    velocity.Velocity = (-3, 0, 0);
+                }
+                if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Down])
+                {
+                    velocity.Velocity = (0, 0, 3);
+                }
+                if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Right])
+                {
+                    droneDirection = Matrix3.CreateRotationY(2) * droneDirection;
+                }
+                if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Left])
+                {
+                    droneDirection = Matrix3.CreateRotationY(-2) * droneDirection;
+                }
+            
         }
     }
 }

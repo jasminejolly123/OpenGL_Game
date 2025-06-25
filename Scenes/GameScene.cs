@@ -81,8 +81,6 @@ namespace OpenGL_Game.Scenes
             cameraManager.AddCamera(newCamera);
         }
 
-        Drone newDrone;
-
         //public void CreateDrone()
         //{
         //    newDrone = new Drone(new OpenTK.Mathematics.Vector3(0, 3.5f, 0), new OpenTK.Mathematics.Vector3(0, 1.5f, 0), (new ComponentGeometry("Geometry/Drone/droneobject.obj")));
@@ -92,14 +90,14 @@ namespace OpenGL_Game.Scenes
         public void CreateEntities()
         {
             Entity newEntity;
+            Drone drone;
 
-            newEntity = new Entity("Drone");
-            newEntity.AddComponent(new ComponentPosition(0, 3.5f, 0));
-            newEntity.AddComponent(new ComponentScale(1, 1, 1));
-            newEntity.AddComponent(new ComponentCollisionSphere(0.5f));
-            newEntity.AddComponent(new ComponentVelocity(0, 0, 0));
-            newEntity.AddComponent(new ComponentGeometry("Geometry/Drone/droneobject.obj"));
-            entityManager.AddEntity(newEntity);
+            drone = new Drone(new OpenTK.Mathematics.Vector3(-5, 1.5f, 7), new OpenTK.Mathematics.Vector3(-5, 1.5f, 7), "Geometry/Drone/droneobject.obj");
+            drone.AddComponent(new ComponentGeometry("Geometry/Drone/droneobject.obj"));
+            drone.AddComponent(new ComponentScale(1, 1, 1));
+            drone.AddComponent(new ComponentPosition(5, 3, 7));
+            drone.AddComponent(new ComponentVelocity(0, 0, 0));
+            droneManager.AddDrone(drone);
 
             newEntity = new Entity("Key");
             newEntity.AddComponent(new ComponentPosition(-8, 0, 46));
@@ -285,7 +283,7 @@ namespace OpenGL_Game.Scenes
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
             // Action ALL systems
-            systemManager.ActionSystems(entityManager, cameraManager);
+            systemManager.ActionSystems(entityManager, cameraManager, droneManager);
 
            // if (collisionManager != null)
             //{

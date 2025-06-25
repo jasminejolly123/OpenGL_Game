@@ -24,7 +24,7 @@ namespace OpenGL_Game.Systems
             get { return "SystemPhysics"; }
         }
 
-        public void OnAction(List<Entity> entities, List<Camera> cameras)    
+        public void OnAction(List<Entity> entities, List<Camera> cameras, List<Drone> drones)    
         {
             foreach (Entity entity in entities)
             {

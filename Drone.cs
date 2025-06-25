@@ -1,5 +1,8 @@
 ﻿using OpenGL_Game.Components;
 using OpenTK.Mathematics;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace OpenGL_Game
 {
@@ -9,6 +12,8 @@ namespace OpenGL_Game
         public Vector3 oldCameraPosition, cameraPosition, cameraDirection, cameraUp;
         private Vector3 targetPosition;
         public float cameraradius;
+        List<IComponent> componentList = new List<IComponent>();
+        ComponentTypes mask;
 
         public Drone()
         {
@@ -19,7 +24,7 @@ namespace OpenGL_Game
             projection = Matrix4.CreatePerspectiveFieldOfView(MathHelper.DegreesToRadians(45), 1.0f, 0.1f, 100f);
         }
 
-        public Drone(Vector3 cameraPos, Vector3 targetPos, ComponentGeometry geometry)
+        public Drone(Vector3 cameraPos, Vector3 targetPos, string geometry)
         {
             cameraUp = new Vector3(0.0f, 1.0f, 0.0f);
             cameraPosition = cameraPos;
@@ -27,6 +32,22 @@ namespace OpenGL_Game
             cameraradius = 2;
             cameraDirection.Normalize();
             UpdateView();
+        }
+
+        public void AddComponent(IComponent component)
+        {
+            Debug.Assert(component != null, "Component cannot be null");
+            componentList.Add(component);
+            mask |= component.ComponentType;
+        }
+
+        public ComponentTypes Mask
+        {
+            get { return mask; }
+        }
+        public List<IComponent> Components
+        {
+            get { return componentList; }
         }
 
         public void PutBack()

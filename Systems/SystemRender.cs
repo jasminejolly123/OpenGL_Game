@@ -69,13 +69,43 @@ namespace OpenGL_Game.Systems
             get { return "SystemRender"; }
         }
 
-        public void OnAction(List<Entity>entities, List<Camera> cameras)
+        public void OnAction(List<Entity>entities, List<Camera> cameras, List<Drone> drones)
         {
             foreach (Entity entity in entities)
             {
                 if ((entity.Mask & MASK) == MASK)
                 {
                     List<IComponent> components = entity.Components;
+
+                    IComponent geometryComponent = components.Find(delegate (IComponent component)
+                    {
+                        return component.ComponentType == ComponentTypes.COMPONENT_GEOMETRY;
+                    });
+                    Geometry geometry = ((ComponentGeometry)geometryComponent).Geometry();
+
+                    IComponent positionComponent = components.Find(delegate (IComponent component)
+                    {
+                        return component.ComponentType == ComponentTypes.COMPONENT_POSITION;
+                    });
+                    Vector3 position = ((ComponentPosition)positionComponent).Position;
+                    Matrix4 model = Matrix4.CreateTranslation(position);
+
+                    IComponent scaleComponent = components.Find(delegate (IComponent component)
+                    {
+                        return component.ComponentType == ComponentTypes.COMPONENT_SCALE;
+                    });
+                    Vector3 scale = ((ComponentPosition)positionComponent).Position;
+                    Matrix4 model2 = Matrix4.CreateScale(scale);
+
+                    Draw(model, model2, geometry, cameras);
+                }
+            }
+
+            foreach (Drone drone in drones)
+            {
+                if ((drone.Mask & MASK) == MASK)
+                {
+                    List<IComponent> components = drone.Components;
 
                     IComponent geometryComponent = components.Find(delegate (IComponent component)
                     {
