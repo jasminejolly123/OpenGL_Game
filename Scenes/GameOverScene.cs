@@ -55,8 +55,8 @@ namespace OpenGL_Game.Scenes
             paint.Color = SKColors.Black;
             paint.Style = SKPaintStyle.Stroke;
             GUI.DrawText("Game Over", sceneManager.Size.X * 0.5f, 150, paint);
-            Score newwScore = new Score();
-            GUI.DrawText(newwScore.Value, sceneManager.Size.X * 0.5f, 50, paint);
+            
+            
             GUI.Render();
         }
 

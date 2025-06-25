@@ -30,6 +30,7 @@ namespace OpenGL_Game.Scenes
         CollisionManager collisionManager;
         public Camera camera;
         public Drone drone;
+        public static Score newScore;
         public static GameScene gameInstance;
         public bool[] keysPressed = new bool[500];
         FrameEventArgs e;
@@ -46,6 +47,7 @@ namespace OpenGL_Game.Scenes
             cameraManager = new CameraManager();
             droneManager = new DroneManager();
             collisionManager = new MazeEscapeCollisionManager();
+            newScore = new Score();
 
             // Set the title of the window
             sceneManager.Title = "Game";
@@ -271,7 +273,7 @@ namespace OpenGL_Game.Scenes
 
         }
 
-        public Score newScore = new Score();
+        //public Score newScore = new Score();
 
         /// <summary>
         /// This is called when the game should draw itself.

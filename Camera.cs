@@ -1,4 +1,7 @@
-﻿using OpenTK.Mathematics;
+﻿using OpenGL_Game.Scenes;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using System.Xml;
 
 namespace OpenGL_Game
 {
@@ -8,6 +11,8 @@ namespace OpenGL_Game
         public Vector3 oldCameraPosition, cameraPosition, cameraDirection, cameraUp;
         private Vector3 targetPosition;
         public float cameraradius;
+        public Vector3 oldOldCameraPosition;
+        FrameEventArgs e;
 
         public Camera()
         {
@@ -58,6 +63,11 @@ namespace OpenGL_Game
         {
             targetPosition = cameraPosition + cameraDirection;
             view = Matrix4.LookAt(cameraPosition, targetPosition, cameraUp);
+            
+            if (GameScene.dt % 5 == 0)
+            {
+                oldOldCameraPosition = cameraPosition;
+            }
         }
     }
 }

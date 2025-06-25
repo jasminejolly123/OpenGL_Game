@@ -68,8 +68,8 @@ namespace OpenGL_Game.Managers
                 }
 
             }
-
             ClearManifold();
         }
     }
 }
+

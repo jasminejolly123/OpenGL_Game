@@ -19,6 +19,7 @@ using System.Numerics;
 using System.Windows.Forms;
 using static System.Formats.Asn1.AsnWriter;
 using System.Windows.Forms.Automation;
+using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
 
 namespace OpenGL_Game.Systems
 {
@@ -44,48 +45,36 @@ namespace OpenGL_Game.Systems
         {
             foreach (Drone drone in drones)
             {
-                if ((drone.Mask & MASK) == MASK)
+                foreach (Camera camera in cameras)
                 {
-                    List<IComponent> components = drone.Components;
-
-                    IComponent positionComponent = components.Find(delegate (IComponent component)
+                    if ((drone.Mask & MASK) == MASK)
                     {
-                        return component.ComponentType == ComponentTypes.COMPONENT_POSITION;
-                    });
-                    IComponent velocityComponent = components.Find(delegate (IComponent component)
-                    {
-                        return component.ComponentType == ComponentTypes.COMPONENT_VELOCITY;
-                    });
+                        List<IComponent> dcomponents = drone.Components;
 
-                    Motion((ComponentPosition)positionComponent, (ComponentVelocity)velocityComponent, drone);
+                        IComponent positionComponent = dcomponents.Find(delegate (IComponent component)
+                        {
+                            return component.ComponentType == ComponentTypes.COMPONENT_POSITION;
+                        });
+                        IComponent velocityComponent = dcomponents.Find(delegate (IComponent component)
+                        {
+                            return component.ComponentType == ComponentTypes.COMPONENT_VELOCITY;
+                        });
+
+
+
+                        Motion((ComponentPosition)positionComponent, (ComponentVelocity)velocityComponent, drone, camera);
+                    }
                 }
             }
         }
 
-        public void Motion(ComponentPosition position, ComponentVelocity velocity, Drone drone)
+        public void Motion(ComponentPosition position, ComponentVelocity velocity, Drone drone, Camera camera)
         {
+            if (GameScene.dt > -1)
+            {
+                position.position = camera.oldOldCameraPosition;
 
-
-                GameScene.dt = (float)e.Time;
-                System.Console.WriteLine("fps=" + (int)(1.0 / GameScene.dt));
-
-                if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Up])
-                {
-                    velocity.Velocity = (-3, 0, 0);
-                }
-                if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Down])
-                {
-                    velocity.Velocity = (0, 0, 3);
-                }
-                if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Right])
-                {
-                    droneDirection = Matrix3.CreateRotationY(2) * droneDirection;
-                }
-                if (keysPressed[(char)OpenTK.Windowing.GraphicsLibraryFramework.Keys.Left])
-                {
-                    droneDirection = Matrix3.CreateRotationY(-2) * droneDirection;
-                }
-            
+            }  
         }
     }
 }
